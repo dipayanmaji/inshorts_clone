@@ -1,22 +1,19 @@
 import { Route, Routes } from 'react-router';
 import './App.css';
-import { useEffect } from 'react';
-import axios from 'axios';
+import News from './pages/News/News';
 
 function App() {
-
-  const apiCall = async () => {
-    const result = await axios.get('https://newsapi.org/v2/top-headlines?country=in&category=business&apiKey=900c811be75045699cf8f0ace6a1a035');
-    console.log(result.data);
-  }
-
-  useEffect(() => {
-    apiCall();
-  }, [])
 
   return (
     <div className="App">
       <Routes>
+        <Route path='/' element={<News category="general" />} />
+        <Route path='/business' element={<News category="business" />} />
+        <Route path='/entertainment' element={<News category="entertainment" />} />
+        <Route path='/health' element={<News category="health" />} />
+        <Route path='/science' element={<News category="science" />} />
+        <Route path='/sports' element={<News category="sports" />} />
+        <Route path='/technology' element={<News category="technology" />} />
       </Routes>
     </div>
   );
