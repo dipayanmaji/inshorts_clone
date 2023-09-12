@@ -8,7 +8,7 @@
 
 <h1></h1>
 
-![Screenshot (660)](https://github.com/dipayanmaji/zomato-clone/assets/121128467/c65a295e-131e-40a9-b228-ad9f40dfda2f)
+<img width="947" alt="inshrots_clone_1" src="https://github.com/dipayanmaji/inshorts_clone/assets/121128467/297af33c-da17-4af4-a7e9-128b5dc5b84c">
 
 <h1></h1>
 <h1>Features</h1>
@@ -35,4 +35,4 @@
 </ul>
 <h1></h1>
 
-![Screenshot (659)](https://github.com/dipayanmaji/zomato-clone/assets/121128467/1ee410b0-3514-4fb3-a121-0e749fac201f)
+<img width="947" alt="inshrots_clone_2" src="https://github.com/dipayanmaji/inshorts_clone/assets/121128467/19cdaf38-3e6e-439e-b35b-1558d106a6c2">
