@@ -15,7 +15,7 @@ const News = ({ category, title }) => {
 
     const apiCall = async () => {
         const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=900c811be75045699cf8f0ace6a1a035`);
-        console.log(result.data);
+        // console.log(result.data);
         totalArticles = result.data.totalResults;
         setArticles(result.data.articles);
         setLoader(false);

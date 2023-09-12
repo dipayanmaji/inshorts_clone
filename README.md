@@ -1,70 +1,38 @@
-# Getting Started with Create React App
+<h1>Hosted Link</h1>
+<h1>
+  <a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.herokuapp.com?font=Fira+Code&pause=1000&width=435&lines=This+is+my+Inshorts+Clone+Project+%F0%9F%A4%A9;Hi+Guys!+%F0%9F%91%8B" alt="Typing SVG" /></a>
+</h1>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
-## Available Scripts
+[**View Demo**](https://inshorts-dipayan.vercel.app/)
 
-In the project directory, you can run:
+<h1></h1>
 
-### `npm start`
+![Screenshot (660)](https://github.com/dipayanmaji/zomato-clone/assets/121128467/c65a295e-131e-40a9-b228-ad9f40dfda2f)
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+<h1></h1>
+<h1>Features</h1>
+<ul>
+  <li>Provide brief news summaries for quick reading</li>
+  <li>Let users tailor their news preferences.</li>
+  <li>Keep users informed with live news coverage.</li>
+  <li>Include images for richer content.</li>
+</ul>
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+<h1>Tech Stack</h1>
+<ul>
+  <li>ReactJS</li>
+  <li>JavaScript</li>
+  <li>HTML/CSS</li>
+  <li>SCSS</li>
+</ul>
 
-### `npm test`
+<h1>Description</h1>
+<ul>
+  <li>Providing news summaries for quick and easy understanding.</li>
+  <li>Customizable news feeds for personalized content.</li>
+  <li>Timely updates on breaking news and events.</li>
+</ul>
+<h1></h1>
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+![Screenshot (659)](https://github.com/dipayanmaji/zomato-clone/assets/121128467/1ee410b0-3514-4fb3-a121-0e749fac201f)
