@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import './Header.scss';
 import { Link } from "react-router-dom";
-import logo from '../../utilities/images/inshorts-logo.png'
+import logo from '../../utilities/images/inshorts-logo-black.png'
 import Navbar from "../Navbar/Navbar";
 
 const Header = () => {
     const [displayNavbar, setDisplayNavbar] = useState(false);
     return (
-        <div className="header">
+        <header className="header">
 
             <div className={`nav-menu ${displayNavbar && "close-nav-menu"}`} >
                 <Navbar displayNavbar={displayNavbar} setDisplayNavbar={setDisplayNavbar} />
@@ -25,7 +25,7 @@ const Header = () => {
             <Link to={'/'} className="logo">
                 <img src={logo} alt="Inshorts Clone" />
             </Link>
-        </div>
+        </header>
     )
 }
 
