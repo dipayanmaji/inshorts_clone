@@ -14,7 +14,11 @@ const News = ({ category, title }) => {
     const [lodingBtn, setLodingBtn] = useState(false);
 
     const apiCall = async () => {
-        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=900c811be75045699cf8f0ace6a1a035`);
+        // get api key from https://newsapi.org/
+        // api key 1 : 900c811be75045699cf8f0ace6a1a035
+        // api key 2 : 7d936a466bfc4fbfbfb051c0e694dd92
+
+        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=7d936a466bfc4fbfbfb051c0e694dd92`);
         // console.log(result.data);
         totalArticles = result.data.totalResults;
         setArticles(result.data.articles);
