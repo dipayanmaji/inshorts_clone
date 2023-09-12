@@ -7,6 +7,11 @@ import loading from '../../utilities/images/loading.gif';
 let totalArticles;
 let pageNum;
 
+// get api key from https://newsapi.org/
+// api key 1 : 900c811be75045699cf8f0ace6a1a035
+// api key 2 : 7d936a466bfc4fbfbfb051c0e694dd92
+const apiKey = "7d936a466bfc4fbfbfb051c0e694dd92";
+
 const News = ({ category, title }) => {
     const [articles, setArticles] = useState([]);
     const [displayLoadMore, setDisplayLoadMore] = useState(true);
@@ -14,11 +19,7 @@ const News = ({ category, title }) => {
     const [lodingBtn, setLodingBtn] = useState(false);
 
     const apiCall = async () => {
-        // get api key from https://newsapi.org/
-        // api key 1 : 900c811be75045699cf8f0ace6a1a035
-        // api key 2 : 7d936a466bfc4fbfbfb051c0e694dd92
-
-        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=7d936a466bfc4fbfbfb051c0e694dd92`);
+        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=${apiKey}`);
         // console.log(result.data);
         totalArticles = result.data.totalResults;
         setArticles(result.data.articles);
@@ -37,7 +38,7 @@ const News = ({ category, title }) => {
     const loadMoreArticles = async () => {
         setLodingBtn(true);
         pageNum += 1;
-        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=900c811be75045699cf8f0ace6a1a035`);
+        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=${apiKey}`);
         console.log(result.data);
         setArticles([...articles, ...result.data.articles]);
 
@@ -61,8 +62,8 @@ const News = ({ category, title }) => {
 
                         {
                             lodingBtn ? <img src={loading} alt="Loading" className="btn-loader" />
-                            :
-                            displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
+                                :
+                                displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
                         }
                     </>
             }
