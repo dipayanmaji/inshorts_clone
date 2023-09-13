@@ -7,7 +7,7 @@ const NewsArticle = ({ article }) => {
 
     return (
         <div className="news-article">
-            <div style={{ backgroundImage: `url(${article.urlToImage})` }} className="article-image"></div>
+            <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div>
 
             <div className="content">
                 <span className="title">{article.title}</span>

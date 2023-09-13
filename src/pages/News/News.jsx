@@ -8,9 +8,12 @@ let totalArticles;
 let pageNum;
 
 // get api key from https://newsapi.org/
+// from one api key we can able to get 100 request per day
 // api key 1 : 900c811be75045699cf8f0ace6a1a035
 // api key 2 : 7d936a466bfc4fbfbfb051c0e694dd92
-const apiKey = "7d936a466bfc4fbfbfb051c0e694dd92";
+// const apiKey = "7d936a466bfc4fbfbfb051c0e694dd92";
+
+const apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
 
 const News = ({ category, title }) => {
     const [articles, setArticles] = useState([]);
@@ -19,11 +22,14 @@ const News = ({ category, title }) => {
     const [lodingBtn, setLodingBtn] = useState(false);
 
     const apiCall = async () => {
-        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=${apiKey}`);
+        const result = await axios.get(`https://gnews.io/api/v4/search?q=${category}&page=${pageNum}&lang=en&country=in&max=10&apikey=${apiKey}`);
+        
+        // const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=${apiKey}`);
         // console.log(result.data);
-        totalArticles = result.data.totalResults;
+        totalArticles = result.data.totalArticles;
         setArticles(result.data.articles);
         setLoader(false);
+
     }
 
     useEffect(() => {
@@ -38,11 +44,12 @@ const News = ({ category, title }) => {
     const loadMoreArticles = async () => {
         setLodingBtn(true);
         pageNum += 1;
-        const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=${apiKey}`);
+        const result = await axios.get(`https://gnews.io/api/v4/search?q=${category}&page=${pageNum}&lang=en&country=in&max=10&apikey=${apiKey}`);
+        // const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=${apiKey}`);
         console.log(result.data);
         setArticles([...articles, ...result.data.articles]);
 
-        if (pageNum * 20 >= totalArticles) setDisplayLoadMore(false); // we get 20 articles in each api call
+        if (pageNum * 10 >= totalArticles) setDisplayLoadMore(false); // we get 10 articles in each api call
         setLodingBtn(false);
     }
 
@@ -55,7 +62,7 @@ const News = ({ category, title }) => {
                         <div className="articles">
                             {
                                 articles.map((article, index) => {
-                                    return article.urlToImage && <NewsArticle key={index} article={article} />
+                                    return <NewsArticle key={index} article={article} />
                                 })
                             }
                         </div>
