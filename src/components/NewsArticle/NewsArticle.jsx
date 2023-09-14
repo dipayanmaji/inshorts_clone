@@ -3,7 +3,7 @@ import './NewsArticle.scss';
 import { getDate } from "../../utilities/convertToDate";
 
 const NewsArticle = ({ article }) => {
-    const {hours, minutes, meridiem, day, date, month, year} = getDate(article.publishedAt);
+    const { hours, minutes, meridiem, day, date, month, year } = getDate(article.publishedAt);
 
     return (
         <div className="news-article">

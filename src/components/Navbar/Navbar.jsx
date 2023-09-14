@@ -1,6 +1,6 @@
 import React from "react";
 import './Navbar.scss';
-import { NavLink, useParams } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 const categories = [
     {
         english: "National",
@@ -41,18 +41,20 @@ const Navbar = ({ displayNavbar, setDisplayNavbar, language, setLanguage, currPa
     const categoryClicked = () => {
         setDisplayNavbar(false);
     }
-    const params = useParams();
 
     const languageHandler = (e) => {
-        setLanguage(language == "en" ? "hi" : "en");
+        let newsLanguage = e.target.id;
+        console.log(newsLanguage);
+        setLanguage(newsLanguage);
+        localStorage.setItem("language", newsLanguage);
         setDisplayNavbar(false);
     }
 
     return (
         <div className={`navbar ${!displayNavbar && "close-navbar"}`}>
             <div className="language">
-                <NavLink to={`/en/${currPath}`} className="english" onClick={languageHandler}>English</NavLink>
-                <NavLink to={`/hi/${currPath}`} className="hindi" onClick={languageHandler}>हिन्दी</NavLink>
+                <NavLink to={`/en/${currPath}`} id="en" onClick={(languageHandler)}>English</NavLink>
+                <NavLink to={`/hi/${currPath}`} id="hi" onClick={languageHandler}>हिन्दी</NavLink>
             </div>
 
             <hr />

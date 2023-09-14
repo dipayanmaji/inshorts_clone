@@ -3,59 +3,97 @@ import './News.scss';
 import axios from "axios";
 import NewsArticle from "../../components/NewsArticle/NewsArticle";
 import loading from '../../utilities/images/loading.gif';
-import { useParams } from "react-router";
+import { useNavigate, useParams } from "react-router";
 
+const validQuaries = ["general", "national", "international", "business", "entertainment", "health", "science", "sports", "technology"];
 let totalArticles;
 let pageNum;
 
-// get api key from https://newsapi.org/
-// from one api key we can able to get 100 request per day
-// api key 1 : 900c811be75045699cf8f0ace6a1a035
-// api key 2 : 7d936a466bfc4fbfbfb051c0e694dd92
-// const apiKey = "7d936a466bfc4fbfbfb051c0e694dd92";
+// get apikey from https://gnews.io/
+// for one apikey we can able to send 100 request per day
+let apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
 
-// get api key from https://gnews.io/
-// from one api key we can able to get 100 request per day
-// const apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
-// const apiKey = "239eafb61b40e1419a2bcd08e20492f7";
-const apiKey = "743d722dd292a77769e54e8d6aeb5475";
-
-const News = ({language, setCurrPath}) => {
+const News = ({ language, setCurrPath }) => {
     const [articles, setArticles] = useState([]);
     const [displayLoadMore, setDisplayLoadMore] = useState(true);
     const [loader, setLoader] = useState(true);
     const [lodingBtn, setLodingBtn] = useState(false);
+    const navigate = useNavigate();
     const params = useParams();
     let category = params.category;
 
-    if(category == "national" || category == "international"){
+    if (category == "national" || category == "international") {
         category = "general";
     }
 
     const apiCall = async () => {
         setLoader(true);
-        const result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
-        
+        let result;
+        try {
+            result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+            // as I use a free api now, that's why the 'page' quary not valid here. Still I use it by thinking that I have a paid api.
+        }
+        catch (err) {
+            // when the per apikey's validity is expired then use another apikey through try-catch method
+            console.log("expired 1st apikey");
+            try {
+                apiKey = "239eafb61b40e1419a2bcd08e20492f7";
+                result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+            }
+            catch (err2) {
+                console.log("expired 2nd apikey");
+                try {
+                    apiKey = "743d722dd292a77769e54e8d6aeb5475";
+                    result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                }
+                catch (err3) {
+                    console.log("expired 3rd apikey");
+                    try {
+                        apiKey = "606ac7501ef2bd39836d80bceb5f32ec";
+                        result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                    }
+                    catch (err4) {
+                        console.log("expired 4th apikey");
+                        try {
+                            apiKey = "611a1fcfe8a977c10b329207423901ff";
+                            result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                        }
+                        catch (err4) {
+                            console.log("expired 5th apikey");
+                        }
+                    }
+
+                }
+            }
+        }
+
         totalArticles = result.data.totalArticles;
         setArticles(result.data.articles);
         setLoader(false);
     }
 
     useEffect(() => {
-        setCurrPath(params.category);
-        pageNum = 1;
-        apiCall();
-        document.title = params.category == "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase() + " NEWS || INSHORTS CLONE";
-        window.scrollTo(0, 0);
-
-        // window.history.replaceState(null, '', category == "general" ? "" : category == "world" ? "international" : category);
+        if (params.category == undefined || !validQuaries.includes(params.category)) {
+            navigate(`/${language}/general`);
+        }
+        else {
+            setCurrPath(params.category);
+            pageNum = 1;
+            apiCall();
+            document.title = (params.category == "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase()) + " NEWS || INSHORTS CLONE";
+            window.scrollTo(0, 0);
+        }
     }, [params.category, language])
 
     const loadMoreArticles = async () => {
         setLodingBtn(true);
         pageNum += 1;
-        const result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
-        setArticles([...articles, ...result.data.articles]);
+        try {
+            const result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+            setArticles([...articles, ...result.data.articles]);
+        } catch (err) {
+            console.log("apikey validity expired");
+        }
 
         if (pageNum * 10 >= totalArticles) setDisplayLoadMore(false); // we get 10 articles in each api call
         setLodingBtn(false);

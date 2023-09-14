@@ -32,7 +32,7 @@ const Footer = () => {
 
                 <div className="right-part">
                     <a href="https://www.facebook.com/dip.ayan.716" target="_blank"><i className="fa-brands fa-facebook-f"></i></a>
-                    <a href="https://twitter.com/dipayanmaji11" target="_blank"><i className="fa-brands fa-twitter"></i></a>
+                    <a href="https://twitter.com/dipayanmaji11" target="_blank"><i className="fa-brands fa-x-twitter"></i></a>
                     <a href="https://www.linkedin.com/in/dipayanmaji/" target="_blank"><i className="fa-brands fa-linkedin-in"></i></a>
                 </div>
             </div>

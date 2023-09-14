@@ -65,6 +65,7 @@
         }
 
     }
+
     .close-nav-menu {
         left: 0;
     }
@@ -81,7 +82,7 @@
 }
 
 @media screen and (max-width: 340px) {
-    .header{
+    .header {
         justify-content: flex-end;
     }
 }
