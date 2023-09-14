@@ -3,6 +3,7 @@ import './News.scss';
 import axios from "axios";
 import NewsArticle from "../../components/NewsArticle/NewsArticle";
 import loading from '../../utilities/images/loading.gif';
+import { useParams } from "react-router";
 
 let totalArticles;
 let pageNum;
@@ -13,40 +14,47 @@ let pageNum;
 // api key 2 : 7d936a466bfc4fbfbfb051c0e694dd92
 // const apiKey = "7d936a466bfc4fbfbfb051c0e694dd92";
 
-const apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
+// get api key from https://gnews.io/
+// from one api key we can able to get 100 request per day
+// const apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
+// const apiKey = "239eafb61b40e1419a2bcd08e20492f7";
+const apiKey = "743d722dd292a77769e54e8d6aeb5475";
 
-const News = ({ category, title }) => {
+const News = ({language, setCurrPath}) => {
     const [articles, setArticles] = useState([]);
     const [displayLoadMore, setDisplayLoadMore] = useState(true);
     const [loader, setLoader] = useState(true);
     const [lodingBtn, setLodingBtn] = useState(false);
+    const params = useParams();
+    let category = params.category;
+
+    if(category == "national" || category == "international"){
+        category = "general";
+    }
 
     const apiCall = async () => {
-        const result = await axios.get(`https://gnews.io/api/v4/search?q=${category}&page=${pageNum}&lang=en&country=in&max=10&apikey=${apiKey}`);
+        setLoader(true);
+        const result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
         
-        // const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=${apiKey}`);
-        // console.log(result.data);
         totalArticles = result.data.totalArticles;
         setArticles(result.data.articles);
         setLoader(false);
-
     }
 
     useEffect(() => {
+        setCurrPath(params.category);
         pageNum = 1;
         apiCall();
-        document.title = title + " News || Inshorts Clone";
+        document.title = params.category == "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase() + " NEWS || INSHORTS CLONE";
         window.scrollTo(0, 0);
 
-        window.history.replaceState(null, '', category);
-    }, [])
+        // window.history.replaceState(null, '', category == "general" ? "" : category == "world" ? "international" : category);
+    }, [params.category, language])
 
     const loadMoreArticles = async () => {
         setLodingBtn(true);
         pageNum += 1;
-        const result = await axios.get(`https://gnews.io/api/v4/search?q=${category}&page=${pageNum}&lang=en&country=in&max=10&apikey=${apiKey}`);
-        // const result = await axios.get(`https://newsapi.org/v2/top-headlines?country=in&category=${category}&page=${pageNum}&apiKey=${apiKey}`);
-        console.log(result.data);
+        const result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
         setArticles([...articles, ...result.data.articles]);
 
         if (pageNum * 10 >= totalArticles) setDisplayLoadMore(false); // we get 10 articles in each api call

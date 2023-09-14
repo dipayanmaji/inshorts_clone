@@ -1,23 +1,25 @@
-import { Route, Routes } from 'react-router';
+import { Route, Routes, useNavigate, useParams } from 'react-router';
 import './App.css';
 import News from './pages/News/News';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
+import { useEffect, useState } from 'react';
 
 function App() {
+  const [language, setLanguage] = useState("en");
+  const [currPath, setCurrPath] = useState("/");
+  const navigate = useNavigate();
+
+  useEffect(()=>{
+    navigate('/en/general');
+  }, []);
+
   return (
     <div className="App">
-      <Header />
+      <Header language={language} setLanguage={setLanguage} currPath={currPath} setCurrPath={setCurrPath} />
 
       <Routes>
-        <Route path='/' element={<News key={"general"} category="general" title="General" />} />
-        <Route path='/business' element={<News key={"business"} category="business" title="Business" />} />
-        <Route path='/entertainment' element={<News key={"entertainment"} category="entertainment" title="Entertainment" />} />
-        <Route path='/health' element={<News key={"health"} category="health" title="Health" />} />
-        <Route path='/science' element={<News key={"science"} category="science" title="Science" />} />
-        <Route path='/sports' element={<News key={"sports"} category="sports" title="Sports" />} />
-        <Route path='/technology' element={<News key={"technology"} category="technology" title="Technology" />} />
-        <Route path='*' element={<News key={"general"} category="general" title="General" />} />
+        <Route path={`/${language}/:category`} element={<News key={""} language={language} setCurrPath={setCurrPath} />} />
       </Routes>
 
       <Footer />
