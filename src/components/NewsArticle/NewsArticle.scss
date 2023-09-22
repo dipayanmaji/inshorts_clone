@@ -88,7 +88,8 @@
     border-radius: 0;
     box-shadow: none;
     grid-template-columns: unset;
-    grid-template-rows: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 6fr) 1fr;
+    grid-gap: 8px;
 
     .article-image {
         border-radius: 0;
@@ -112,6 +113,22 @@
         .source {
             position: relative;
             margin-bottom: 0;
+        }
+    }
+
+    .bottom-section{
+        background-color: rgba(0, 0, 0, 0.9);
+        color: white;
+        font-size: 12px;
+        font-weight: 100;
+        padding: 8px;
+        box-sizing: border-box;
+        line-height: 16px;
+
+        .image-link{
+            font-size: 10px;
+            text-decoration: none;
+            color: #9c9c9c;
         }
     }
 }

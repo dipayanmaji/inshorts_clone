@@ -19,6 +19,10 @@ const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader }) => 
                 <p className="description">{article.description}</p>
                 <span className="source">read more at <a href={article.url} target="_blank" className="name">{article.source.name}</a></span>
             </div>
+
+            {isMobileDevice && <span className="bottom-section">To see the full image <br />
+            <a href={article.image} target="_blank" className="image-link">Tap here</a>
+            </span>}
         </div>
     )
 }
