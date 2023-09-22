@@ -15,6 +15,8 @@
         align-items: flex-start;
         position: fixed;
         left: 0;
+        width: 0;
+        transition: 0.3s;
 
         .menu-container {
             display: flex;
@@ -67,7 +69,7 @@
     }
 
     .close-nav-menu {
-        left: 0;
+        width: 18rem;
     }
 
     .logo {
