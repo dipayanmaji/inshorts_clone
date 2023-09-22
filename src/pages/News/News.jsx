@@ -110,6 +110,8 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
         else{
             setHideHeader(true);
         }
+
+        window.scroll(0, 50);
     }
 
     const sliderSettings = {
@@ -129,7 +131,7 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
                 loader ? <img src={loading} alt="Loading" className="loader" />
                     :
                     isMobileDevice ?
-                        <Slider {...sliderSettings} className="articles">
+                        <Slider  {...sliderSettings} className="articles">
                             {
                                 articles.map((article, index) => {
                                     return <NewsArticle key={index} article={article} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} />
