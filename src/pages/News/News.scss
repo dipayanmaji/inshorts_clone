@@ -43,10 +43,12 @@
 
 // mobile version
 .mobile-news {
-    min-height: 100vh;
+    height: 100%;
+    // min-height: 100vh;
     margin: auto;
     max-width: 900px;
     overflow: auto;
+    position: absolute;
 
     .articles {
         display: block;

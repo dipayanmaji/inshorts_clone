@@ -110,8 +110,6 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
         else{
             setHideHeader(true);
         }
-
-        window.scroll(0, 50);
     }
 
     const sliderSettings = {
