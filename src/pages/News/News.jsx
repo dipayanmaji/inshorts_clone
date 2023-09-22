@@ -115,6 +115,7 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
     const sliderSettings = {
         infinite: false,
         vertical: true,
+        verticalSwiping: true,
         arrows: false,
         speed: 500,
         slidesToShow: 1,

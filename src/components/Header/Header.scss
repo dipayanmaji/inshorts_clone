@@ -87,11 +87,13 @@
     }
 }
 
+// mobile version
 .mobile-header {
     height: 2.5rem;
     transition: 0.3s;
     max-width: 900px;
     box-shadow: none;
+    background-color: rgba(255, 255, 255, 0.85);
     left: 50%;
     transform: translate(-50%, 0);
 
