@@ -4,6 +4,9 @@ import axios from "axios";
 import NewsArticle from "../../components/NewsArticle/NewsArticle";
 import loading from '../../utilities/images/loading.gif';
 import { useNavigate, useParams } from "react-router";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const validQuaries = ["general", "national", "international", "business", "entertainment", "health", "science", "sports", "technology"];
 let totalArticles;
@@ -13,11 +16,12 @@ let pageNum;
 // for one apikey we can able to send 100 request per day
 let apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
 
-const News = ({ language, setCurrPath }) => {
+const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader }) => {
     const [articles, setArticles] = useState([]);
     const [displayLoadMore, setDisplayLoadMore] = useState(true);
     const [loader, setLoader] = useState(true);
     const [lodingBtn, setLodingBtn] = useState(false);
+
     const navigate = useNavigate();
     const params = useParams();
     let category = params.category;
@@ -99,26 +103,54 @@ const News = ({ language, setCurrPath }) => {
         setLodingBtn(false);
     }
 
+    const slideScrollHandler = (oldIndex, newIndex)=>{
+        if(oldIndex > newIndex){
+            setHideHeader(false);
+        }
+        else{
+            setHideHeader(true);
+        }
+    }
+
+    const sliderSettings = {
+        infinite: false,
+        vertical: true,
+        arrows: false,
+        speed: 500,
+        slidesToShow: 1,
+        slidesToScroll: 1,
+        beforeChange: slideScrollHandler,
+    }
+
     return (
-        <div className="news">
+        <div className={`news ${isMobileDevice && "mobile-news"}`}>
             {
                 loader ? <img src={loading} alt="Loading" className="loader" />
                     :
-                    <>
-                        <div className="articles">
+                    isMobileDevice ?
+                        <Slider {...sliderSettings} className="articles">
                             {
                                 articles.map((article, index) => {
-                                    return <NewsArticle key={index} article={article} />
+                                    return <NewsArticle key={index} article={article} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} />
                                 })
                             }
-                        </div>
+                        </Slider>
+                        :
+                        <>
+                            <div className="articles">
+                                {
+                                    articles.map((article, index) => {
+                                        return <NewsArticle key={index} article={article} />
+                                    })
+                                }
+                            </div>
 
-                        {
-                            lodingBtn ? <img src={loading} alt="Loading" className="btn-loader" />
-                                :
-                                displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
-                        }
-                    </>
+                            {
+                                lodingBtn ? <img src={loading} alt="Loading" className="btn-loader" />
+                                    :
+                                    displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
+                            }
+                        </>
             }
         </div>
     )

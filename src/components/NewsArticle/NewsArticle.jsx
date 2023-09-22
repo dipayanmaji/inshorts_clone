@@ -2,11 +2,15 @@ import React from "react";
 import './NewsArticle.scss';
 import { getDate } from "../../utilities/convertToDate";
 
-const NewsArticle = ({ article }) => {
+const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader }) => {
     const { hours, minutes, meridiem, day, date, month, year } = getDate(article.publishedAt);
+    const articleHandler = () => {
+        if (isMobileDevice)
+            setHideHeader(!hideHeader);
+    }
 
     return (
-        <div className="news-article">
+        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler}>
             <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div>
 
             <div className="content">

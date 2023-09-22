@@ -3,9 +3,12 @@ import './Footer.scss';
 import logo from '../../utilities/images/inshorts-logo-white.png';
 import contact from '../../utilities/images/contact-us.png';
 
-const Footer = () => {
+const Footer = ({isMobileDevice, hideHeader}) => {
     return (
-        <footer className="footer-container">
+        <footer className={`footer-container ${isMobileDevice && "mobile-footer-container"} ${hideHeader && "hide-footer"}`}>
+            {isMobileDevice ?
+            <div className="footer">created by <a className="creator" href="https://www.linkedin.com/in/dipayanmaji/" target="_blank">dipayan</a></div>
+            :
             <div className="footer">
                 <div className="left-part">
                     <div className="container">
@@ -13,6 +16,8 @@ const Footer = () => {
 
                         <div className="copyright">
                             <b>Inshorts Clone</b>
+                            <br />
+                            created by <a className="creator" href='https://www.linkedin.com/in/dipayanmaji/' target='_blank'>dipayan</a>
                             <br />
                             ©COPYRIGHT 2023
                         </div>
@@ -37,7 +42,7 @@ const Footer = () => {
                     <a href='https://www.instagram.com/dipayan.maji/' target='_blank'><i className="fa-brands fa-instagram"></i></a>
                     <a href='https://www.facebook.com/dip.ayan.716' target='_blank'><i className="fa-brands fa-facebook-f"></i></a>
                 </div>
-            </div>
+            </div>}
         </footer>
     )
 }

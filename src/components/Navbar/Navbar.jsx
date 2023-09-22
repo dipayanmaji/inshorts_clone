@@ -44,7 +44,6 @@ const Navbar = ({ displayNavbar, setDisplayNavbar, language, setLanguage, currPa
 
     const languageHandler = (e) => {
         let newsLanguage = e.target.id;
-        console.log(newsLanguage);
         setLanguage(newsLanguage);
         localStorage.setItem("language", newsLanguage);
         setDisplayNavbar(false);

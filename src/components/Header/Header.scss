@@ -86,3 +86,27 @@
         justify-content: flex-end;
     }
 }
+
+.mobile-header {
+    height: 2.5rem;
+    transition: 0.3s;
+    max-width: 900px;
+    box-shadow: none;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    .nav-menu {
+        .menu-container {
+            top: 12px;
+            left: 0;
+        }
+    }
+
+    .logo {
+        display: none;
+    }
+}
+
+.hide-header {
+    transform: translate(-50%, -100%);
+}

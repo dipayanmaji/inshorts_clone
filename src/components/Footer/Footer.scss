@@ -1,4 +1,5 @@
 .footer-container {
+    width: 100%;
     background-color: #323232;
     margin-top: 2rem;
 
@@ -8,7 +9,6 @@
         margin: auto;
         padding: 1rem;
         box-sizing: border-box;
-
         display: flex;
         justify-content: space-between;
         gap: 2rem;
@@ -51,6 +51,10 @@
 
                 b {
                     color: white;
+                }
+
+                .creator {
+                    color: inherit;
                 }
             }
 
@@ -120,4 +124,31 @@
 
         }
     }
+}
+
+// mobile version
+.mobile-footer-container {
+    margin: 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    transition: 0.3s;
+    max-width: 900px;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    .footer {
+        padding: 8px;
+        display: block;
+        color: rgb(182, 182, 182);
+        text-align: center;
+
+        .creator {
+            color: rgb(182, 182, 182);
+        }
+    }
+}
+
+.hide-footer {
+    transform: translate(-50%, 100%);
 }
