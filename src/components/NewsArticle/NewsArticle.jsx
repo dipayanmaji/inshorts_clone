@@ -10,7 +10,7 @@ const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader }) => 
     }
 
     return (
-        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler}>
+        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{height: window.innerHeight}}>
             <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div>
 
             <div className="content">

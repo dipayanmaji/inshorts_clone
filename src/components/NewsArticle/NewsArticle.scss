@@ -83,7 +83,8 @@
 .mobile-news-article {
     width: 100%;
     max-width: 100%;
-    height: 100vh;
+    height: inherit;
+    min-height: inherit;
     padding: 0;
     border-radius: 0;
     box-shadow: none;

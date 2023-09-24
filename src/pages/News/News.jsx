@@ -124,7 +124,7 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
     }
 
     return (
-        <div className={`news ${isMobileDevice && "mobile-news"}`}>
+        <div className={`news ${isMobileDevice && "mobile-news"}`} style={{height: window.innerHeight}}>
             {
                 loader ? <img src={loading} alt="Loading" className="loader" />
                     :
