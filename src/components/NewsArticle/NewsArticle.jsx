@@ -2,7 +2,7 @@ import React from "react";
 import './NewsArticle.scss';
 import { getDate } from "../../utilities/convertToDate";
 
-const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader }) => {
+const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader, height }) => {
     const { hours, minutes, meridiem, day, date, month, year } = getDate(article.publishedAt);
     const articleHandler = () => {
         if (isMobileDevice)
@@ -10,7 +10,7 @@ const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader }) => 
     }
 
     return (
-        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{height: window.innerHeight}}>
+        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{height: isMobileDevice && height}}>
             <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div>
 
             <div className="content">

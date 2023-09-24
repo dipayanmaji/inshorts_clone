@@ -43,19 +43,30 @@
 
 // mobile version
 .mobile-news {
+    display: block;
     width: 100%;
     height: inherit;
     min-height: inherit;
     margin: auto;
     max-width: 900px;
-    overflow: auto;
+    overflow: hidden;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, 0);
+
+    .loader {
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        transform: translate(-50%, -50%);
+    }
 
     .articles {
         display: block;
         gap: 1.5rem;
         margin-bottom: 0;
     }
-    
+
     .slick-vertical .slick-slide {
         border: none;
     }

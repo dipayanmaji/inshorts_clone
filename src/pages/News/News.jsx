@@ -21,6 +21,7 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
     const [displayLoadMore, setDisplayLoadMore] = useState(true);
     const [loader, setLoader] = useState(true);
     const [lodingBtn, setLodingBtn] = useState(false);
+    const [height, setHeight] = useState(window.innerHeight);
 
     const navigate = useNavigate();
     const params = useParams();
@@ -123,8 +124,12 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
         beforeChange: slideScrollHandler,
     }
 
+    window.addEventListener('resize', ()=>{
+        setHeight(window.innerHeight);
+    })
+
     return (
-        <div className={`news ${isMobileDevice && "mobile-news"}`} style={{height: window.innerHeight}}>
+        <div className={`news ${isMobileDevice && "mobile-news"}`} style={{height: isMobileDevice && height}}>
             {
                 loader ? <img src={loading} alt="Loading" className="loader" />
                     :
@@ -132,7 +137,7 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
                         <Slider  {...sliderSettings} className="articles">
                             {
                                 articles.map((article, index) => {
-                                    return <NewsArticle key={index} article={article} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} />
+                                    return <NewsArticle key={index} article={article} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} height={height} />
                                 })
                             }
                         </Slider>
