@@ -15,7 +15,7 @@ const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader, heigh
 
             <div className="content">
                 <span className="title">{article.title}</span>
-                <span className="author-time"><b>short</b> by {article.author} / {`${hours}:${minutes} ${meridiem} on ${day}, ${date} ${month}, ${year}`}</span>
+                <span className="author-time"><b>short</b> by {article.source.name} / {`${hours}:${minutes} ${meridiem} on ${day}, ${date} ${month}, ${year}`}</span>
                 <p className="description">{article.description}</p>
                 <span className="source">read more at <a href={article.url} target="_blank" className="name">{article.source.name}</a></span>
             </div>
