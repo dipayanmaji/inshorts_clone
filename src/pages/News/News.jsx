@@ -24,7 +24,7 @@ const News = () => {
     const [networkErr, setNetworkErr] = useState(false);
 
     const myContext = useContext(MyContext);
-    const { language, setCurrPath, isMobileDevice, setHideHeader, articles, setArticles, height } = myContext;
+    const { language, setCurrPath, isMobileDevice, setHideHeader, articles, setArticles, windowHeight } = myContext;
 
     const navigate = useNavigate();
     const params = useParams();
@@ -131,11 +131,11 @@ const News = () => {
     }
 
     return (
-        <div className={`news ${isMobileDevice && "mobile-news"}`} style={{ height: isMobileDevice && height }}>
+        <div className={`news ${isMobileDevice && "mobile-news"}`} style={{ height: isMobileDevice && windowHeight }}>
             {
                 loader ? <img src={loading} alt="Loading" className="loader" />
                     :
-                    networkErr ? <span className="network-err">Check your interner connection and try again.</span>
+                    networkErr ? <span className="network-err">Check your internet connection and try again.</span>
                         :
                         isMobileDevice ?
                             <Slider  {...sliderSettings} className="articles">

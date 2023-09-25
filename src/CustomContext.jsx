@@ -1,4 +1,4 @@
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 
 export const MyContext = createContext();
 
@@ -9,20 +9,32 @@ const MyContextProvider = (props) => {
     const [hideHeader, setHideHeader] = useState(false);
 
     const [articles, setArticles] = useState([]);
-    const [height, setHeight] = useState(window.innerHeight);
+    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+
+    window.addEventListener('resize', () => {
+        setWindowHeight(window.innerHeight);
+    })
+
+    // Determind that site is open on a mobile device or a desktop.
+    useEffect(() => {
+        const details = navigator.userAgent;
+        const regexp = /android|iphone|kindle|ipad/i;
+        const mobileDevice = regexp.test(details);
+        if (mobileDevice) {
+            setIsMobileDevice(true);
+        } else {
+            setIsMobileDevice(false);
+        }
+    }, [])
 
     const value = {
         language, setLanguage,
         currPath, setCurrPath,
-        isMobileDevice, setIsMobileDevice,
+        isMobileDevice,
         hideHeader, setHideHeader,
         articles, setArticles,
-        height
+        windowHeight
     }
-
-    window.addEventListener('resize', () => {
-        setHeight(window.innerHeight);
-    })
 
     return (
         <MyContext.Provider value={value}>

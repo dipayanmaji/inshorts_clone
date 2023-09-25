@@ -5,7 +5,7 @@ import { MyContext } from "../../CustomContext";
 
 const NewsArticle = ({ article }) => {
     const myContext = useContext(MyContext);
-    const { isMobileDevice, hideHeader, setHideHeader, height } = myContext;
+    const { isMobileDevice, hideHeader, setHideHeader, windowHeight } = myContext;
 
     const { hours, minutes, meridiem, day, date, month, year } = getDate(article.publishedAt);
 
@@ -15,7 +15,7 @@ const NewsArticle = ({ article }) => {
     }
 
     return (
-        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{ height: isMobileDevice && height }}>
+        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{ height: isMobileDevice && windowHeight }}>
             <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div>
 
             <div className="content">
