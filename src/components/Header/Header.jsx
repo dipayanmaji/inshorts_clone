@@ -9,7 +9,7 @@ const Header = () => {
     const [displayNavbar, setDisplayNavbar] = useState(false);
 
     const myContext = useContext(MyContext);
-    const { language, isMobileDevice, hideHeader } = myContext;
+    const { currPath, language, isMobileDevice, hideHeader } = myContext;
 
     return (
         <header className={`header ${isMobileDevice && "mobile-header"} ${hideHeader && "hide-header"}`}>
@@ -26,7 +26,12 @@ const Header = () => {
                         <span className="bar-line"></span>
                         <span className="bar-line"></span>
                     </div>
-                    {!displayNavbar ? "Menu" : "Close"}
+                    {
+                        isMobileDevice ?
+                        currPath.toLocaleUpperCase()
+                        :
+                        !displayNavbar ? "Menu" : "Close"
+                    }
                 </div>
             </div>
 
