@@ -3,13 +3,12 @@ import './App.css';
 import News from './pages/News/News';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect } from 'react';
+import { MyContext } from './CustomContext';
 
 function App() {
-  const [language, setLanguage] = useState(localStorage.getItem("language") ? localStorage.getItem("language") : "en");
-  const [currPath, setCurrPath] = useState("/");
-  const [isMobileDevice, setIsMobileDevice] = useState(false);
-  const [hideHeader, setHideHeader] = useState(false);
+  const myContext = useContext(MyContext);
+  const { setIsMobileDevice } = myContext;
 
   // Determind that site is open on a mobile device or a desktop.
   useEffect(() => {
@@ -25,17 +24,17 @@ function App() {
 
   return (
     <div className="App">
-      <Header language={language} setLanguage={setLanguage} currPath={currPath} isMobileDevice={isMobileDevice} hideHeader={hideHeader} />
+      <Header />
 
       <Routes>
-        <Route path={'/'} element={<News language={language} setCurrPath={setCurrPath} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} />} />
-        <Route path={'/en/:category'} element={<News language={language} setCurrPath={setCurrPath} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} />} />
-        <Route path={'/hi/:category'} element={<News language={language} setCurrPath={setCurrPath} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} />} />
+        <Route path={'/'} element={<News />} />
+        <Route path={'/en/:category'} element={<News />} />
+        <Route path={'/hi/:category'} element={<News />} />
 
-        <Route path={'*'} element={<News language={language} setCurrPath={setCurrPath} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} />} />
+        <Route path={'*'} element={<News />} />
       </Routes>
 
-      <Footer isMobileDevice={isMobileDevice} hideHeader={hideHeader} />
+      <Footer />
     </div>
   );
 }

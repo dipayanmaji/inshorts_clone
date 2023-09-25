@@ -9,6 +9,11 @@
         margin: auto;
     }
 
+    .network-err {
+        margin: auto;
+        color: #f44336;
+    }
+
     .articles {
         display: flex;
         flex-direction: column;
@@ -43,7 +48,6 @@
 
 // mobile version
 .mobile-news {
-    display: block;
     width: 100%;
     height: inherit;
     min-height: inherit;

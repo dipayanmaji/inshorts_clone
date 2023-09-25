@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './News.scss';
 import axios from "axios";
 import NewsArticle from "../../components/NewsArticle/NewsArticle";
@@ -7,6 +7,7 @@ import { useNavigate, useParams } from "react-router";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { MyContext } from "../../CustomContext";
 
 const validQuaries = ["general", "national", "international", "business", "entertainment", "health", "science", "sports", "technology"];
 let totalArticles;
@@ -16,12 +17,14 @@ let pageNum;
 // for one apikey we can able to send 100 request per day
 let apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
 
-const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader }) => {
-    const [articles, setArticles] = useState([]);
+const News = () => {
     const [displayLoadMore, setDisplayLoadMore] = useState(true);
     const [loader, setLoader] = useState(true);
     const [lodingBtn, setLodingBtn] = useState(false);
-    const [height, setHeight] = useState(window.innerHeight);
+    const [networkErr, setNetworkErr] = useState(false);
+
+    const myContext = useContext(MyContext);
+    const { language, setCurrPath, isMobileDevice, setHideHeader, articles, setArticles, height } = myContext;
 
     const navigate = useNavigate();
     const params = useParams();
@@ -33,6 +36,7 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
 
     const apiCall = async () => {
         setLoader(true);
+        setNetworkErr(false);
         let result;
         try {
             result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
@@ -65,15 +69,17 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
                         }
                         catch (err4) {
                             console.log("expired 5th apikey");
+                            if (err4.message === "Network Error") {
+                                setNetworkErr(true);
+                            }
                         }
                     }
-
                 }
             }
         }
 
-        totalArticles = result.data.totalArticles;
-        setArticles(result.data.articles);
+        totalArticles = result?.data.totalArticles;
+        setArticles(result?.data.articles);
         setLoader(false);
     }
 
@@ -104,11 +110,11 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
         setLodingBtn(false);
     }
 
-    const slideScrollHandler = (oldIndex, newIndex)=>{
-        if(oldIndex > newIndex){
+    const slideScrollHandler = (oldIndex, newIndex) => {
+        if (oldIndex > newIndex) {
             setHideHeader(false);
         }
-        else{
+        else {
             setHideHeader(true);
         }
     }
@@ -124,39 +130,37 @@ const News = ({ language, setCurrPath, isMobileDevice, hideHeader, setHideHeader
         beforeChange: slideScrollHandler,
     }
 
-    window.addEventListener('resize', ()=>{
-        setHeight(window.innerHeight);
-    })
-
     return (
-        <div className={`news ${isMobileDevice && "mobile-news"}`} style={{height: isMobileDevice && height}}>
+        <div className={`news ${isMobileDevice && "mobile-news"}`} style={{ height: isMobileDevice && height }}>
             {
                 loader ? <img src={loading} alt="Loading" className="loader" />
                     :
-                    isMobileDevice ?
-                        <Slider  {...sliderSettings} className="articles">
-                            {
-                                articles.map((article, index) => {
-                                    return <NewsArticle key={index} article={article} isMobileDevice={isMobileDevice} hideHeader={hideHeader} setHideHeader={setHideHeader} height={height} />
-                                })
-                            }
-                        </Slider>
+                    networkErr ? <span className="network-err">Check your interner connection and try again.</span>
                         :
-                        <>
-                            <div className="articles">
+                        isMobileDevice ?
+                            <Slider  {...sliderSettings} className="articles">
                                 {
                                     articles.map((article, index) => {
                                         return <NewsArticle key={index} article={article} />
                                     })
                                 }
-                            </div>
+                            </Slider>
+                            :
+                            <>
+                                <div className="articles">
+                                    {
+                                        articles.map((article, index) => {
+                                            return <NewsArticle key={index} article={article} />
+                                        })
+                                    }
+                                </div>
 
-                            {
-                                lodingBtn ? <img src={loading} alt="Loading" className="btn-loader" />
-                                    :
-                                    displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
-                            }
-                        </>
+                                {
+                                    lodingBtn ? <img src={loading} alt="Loading" className="btn-loader" />
+                                        :
+                                        displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
+                                }
+                            </>
             }
         </div>
     )

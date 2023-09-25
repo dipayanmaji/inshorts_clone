@@ -1,11 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import './Header.scss';
 import { Link } from "react-router-dom";
 import logo from '../../utilities/images/inshorts-logo-black.png'
 import Navbar from "../Navbar/Navbar";
+import { MyContext } from "../../CustomContext";
 
-const Header = ({ language, setLanguage, currPath, isMobileDevice, hideHeader }) => {
+const Header = () => {
     const [displayNavbar, setDisplayNavbar] = useState(false);
+
+    const myContext = useContext(MyContext);
+    const { language, isMobileDevice, hideHeader } = myContext;
 
     return (
         <header className={`header ${isMobileDevice && "mobile-header"} ${hideHeader && "hide-header"}`}>
@@ -14,9 +18,6 @@ const Header = ({ language, setLanguage, currPath, isMobileDevice, hideHeader })
                 <Navbar
                     displayNavbar={displayNavbar}
                     setDisplayNavbar={setDisplayNavbar}
-                    language={language}
-                    setLanguage={setLanguage}
-                    currPath={currPath}
                 />
 
                 <div className={`menu-container`} onClick={() => setDisplayNavbar(!displayNavbar)}>

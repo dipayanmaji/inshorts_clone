@@ -1,16 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import './NewsArticle.scss';
 import { getDate } from "../../utilities/convertToDate";
+import { MyContext } from "../../CustomContext";
 
-const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader, height }) => {
+const NewsArticle = ({ article }) => {
+    const myContext = useContext(MyContext);
+    const { isMobileDevice, hideHeader, setHideHeader, height } = myContext;
+
     const { hours, minutes, meridiem, day, date, month, year } = getDate(article.publishedAt);
+
     const articleHandler = () => {
         if (isMobileDevice)
             setHideHeader(!hideHeader);
     }
 
     return (
-        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{height: isMobileDevice && height}}>
+        <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{ height: isMobileDevice && height }}>
             <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div>
 
             <div className="content">
@@ -21,7 +26,7 @@ const NewsArticle = ({ article, isMobileDevice, hideHeader, setHideHeader, heigh
             </div>
 
             {isMobileDevice && <span className="bottom-section">To see the full image <br />
-            <a href={article.image} target="_blank" className="image-link">Tap here</a>
+                <a href={article.image} target="_blank" className="image-link">Tap here</a>
             </span>}
         </div>
     )

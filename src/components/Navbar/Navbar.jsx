@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import './Navbar.scss';
 import { NavLink } from "react-router-dom";
+import { MyContext } from "../../CustomContext";
 const categories = [
     {
         english: "National",
@@ -36,7 +37,10 @@ const categories = [
     }
 ];
 
-const Navbar = ({ displayNavbar, setDisplayNavbar, language, setLanguage, currPath }) => {
+const Navbar = ({ displayNavbar, setDisplayNavbar }) => {
+
+    const myContext = useContext(MyContext);
+    const { language, setLanguage, currPath } = myContext;
 
     const categoryClicked = () => {
         setDisplayNavbar(false);
