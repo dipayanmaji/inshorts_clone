@@ -11,12 +11,8 @@ const MyContextProvider = (props) => {
     const [articles, setArticles] = useState([]);
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
-    window.addEventListener('resize', () => {
-        setWindowHeight(window.innerHeight);
-    })
-
     // Determind that site is open on a mobile device or a desktop.
-    useEffect(() => {
+    const mobileDeviceHandler = ()=>{
         const details = navigator.userAgent;
         const regexp = /android|iphone|kindle|ipad/i;
         const mobileDevice = regexp.test(details);
@@ -25,6 +21,15 @@ const MyContextProvider = (props) => {
         } else {
             setIsMobileDevice(false);
         }
+    }
+
+    window.addEventListener('resize', () => {
+        setWindowHeight(window.innerHeight);
+        // mobileDeviceHandler();
+    })
+
+    useEffect(() => {
+        mobileDeviceHandler();
     }, [])
 
     const value = {

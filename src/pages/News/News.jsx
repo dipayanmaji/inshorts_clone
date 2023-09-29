@@ -8,6 +8,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { MyContext } from "../../CustomContext";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const validQuaries = ["general", "national", "international", "business", "entertainment", "health", "science", "sports", "technology"];
 let totalArticles;
@@ -132,19 +134,22 @@ const News = () => {
 
     return (
         <div className={`news ${isMobileDevice && "mobile-news"}`} style={{ height: isMobileDevice && windowHeight }}>
+            {isMobileDevice && <Header />}
             {
                 loader ? <img src={loading} alt="Loading" className="loader" />
                     :
                     networkErr ? <span className="network-err">Check your internet connection and try again.</span>
                         :
                         isMobileDevice ?
-                            <Slider  {...sliderSettings} className="articles">
-                                {
-                                    articles.map((article, index) => {
-                                        return <NewsArticle key={index} article={article} />
-                                    })
-                                }
-                            </Slider>
+                            <>
+                                <Slider  {...sliderSettings} className="articles">
+                                    {
+                                        articles.map((article, index) => {
+                                            return <NewsArticle key={index} article={article} />
+                                        })
+                                    }
+                                </Slider>
+                            </>
                             :
                             <>
                                 <div className="articles">
@@ -162,6 +167,7 @@ const News = () => {
                                 }
                             </>
             }
+            {isMobileDevice && <Footer />}
         </div>
     )
 }
