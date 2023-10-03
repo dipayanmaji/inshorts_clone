@@ -7,7 +7,6 @@ const MyContextProvider = (props) => {
     const [currPath, setCurrPath] = useState("/");
     const [isMobileDevice, setIsMobileDevice] = useState(false);
     const [hideHeader, setHideHeader] = useState(false);
-
     const [articles, setArticles] = useState([]);
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
@@ -20,12 +19,13 @@ const MyContextProvider = (props) => {
             setIsMobileDevice(true);
         } else {
             setIsMobileDevice(false);
+            setHideHeader(false);
         }
     }
 
     window.addEventListener('resize', () => {
         setWindowHeight(window.innerHeight);
-        // mobileDeviceHandler();
+        mobileDeviceHandler();
     })
 
     useEffect(() => {
