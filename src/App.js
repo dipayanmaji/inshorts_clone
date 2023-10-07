@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <div className="App" style={{ maxHeight: isMobileDevice && windowHeight }}>
+    <div className="App">
 
       {isMobileDevice ?
         <Slider {...sliderSettings} ref={sliderRef}>

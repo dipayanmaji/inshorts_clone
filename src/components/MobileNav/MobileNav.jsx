@@ -61,7 +61,7 @@ const MobileNav = () => {
     const [displayLanguage, setDisplayLanguage] = useState(false);
 
     const myContext = useContext(MyContext);
-    const { language, setLanguage, currPath, sliderRef } = myContext;
+    const { language, setLanguage, currPath, windowHeight, sliderRef } = myContext;
 
     const languageHandler = (e) => {
         let newsLanguage = e.target.id;
@@ -74,7 +74,7 @@ const MobileNav = () => {
     }
 
     return (
-        <div className="mobile-nav">
+        <div className="mobile-nav" style={{ height: windowHeight }}>
             <div className="top-header">
                 <span className="heading">{language == "hi" ? "श्रेणियां एवं विषय" : "Categories and Topics"}</span>
                 <div className="settings-back">
