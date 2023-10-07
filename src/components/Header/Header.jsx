@@ -76,7 +76,7 @@ const Header = () => {
                     </div>
                     {
                         isMobileDevice ?
-                            language == "hi" ? categories.filter((category) => category.english.toLocaleLowerCase() == currPath)[0].hindi
+                            language == "hi" ? categories.filter((category) => category.english.toLocaleLowerCase() == currPath)[0]?.hindi
                                 :
                                 currPath == "general" ? "TOP STORIES" : currPath.toLocaleUpperCase()
                             :

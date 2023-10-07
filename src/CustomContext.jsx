@@ -26,7 +26,7 @@ const MyContextProvider = (props) => {
 
     window.addEventListener('resize', () => {
         setWindowHeight(window.innerHeight);
-        // mobileDeviceHandler();
+        mobileDeviceHandler();
     })
 
     useEffect(() => {

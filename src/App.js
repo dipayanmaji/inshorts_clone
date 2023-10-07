@@ -10,7 +10,7 @@ import MobileNav from './components/MobileNav/MobileNav';
 
 function App() {
   const myContext = useContext(MyContext);
-  const { isMobileDevice, sliderRef } = myContext;
+  const { isMobileDevice, sliderRef, windowHeight } = myContext;
 
   const sliderSettings = {
     infinite: false,
@@ -22,7 +22,7 @@ function App() {
   }
 
   return (
-    <div className="App">
+    <div className="App" style={{ height: isMobileDevice && windowHeight }}>
 
       {isMobileDevice ?
         <Slider {...sliderSettings} ref={sliderRef}>
