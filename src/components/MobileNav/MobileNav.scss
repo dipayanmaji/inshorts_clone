@@ -42,6 +42,14 @@
             .settings {
                 position: relative;
 
+                i{
+                    transition: 0.3s;
+                }
+
+                .rotate-icon{
+                    rotate: 90deg;
+                }
+
                 .language {
                     display: flex;
                     flex-direction: column;

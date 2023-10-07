@@ -77,15 +77,19 @@ const MobileNav = ({ mobileRef }) => {
         <div className="mobile-nav" ref={mobileRef} style={{ height: windowHeight }}>
             <div className="top-header">
                 <span className="heading">{language == "hi" ? "श्रेणियां एवं विषय" : "Categories and Topics"}</span>
+                
                 <div className="settings-back">
+
                     <div className="settings" onClick={() => setDisplayLanguage(!displayLanguage)}>
-                        <i className="fa-solid fa-gear"></i>
+                        <i className={`fa-solid fa-gear ${displayLanguage && "rotate-icon"}`}></i>
                         {displayLanguage && <div className="language">
                             <NavLink to={`/en/${currPath}`} id="en" onClick={languageHandler}>English</NavLink>
                             <NavLink to={`/hi/${currPath}`} id="hi" onClick={languageHandler}>हिन्दी</NavLink>
                         </div>}
                     </div>
+
                     <i className="fa-solid fa-angle-right" onClick={sliderHandler}></i>
+
                 </div>
             </div>
 
