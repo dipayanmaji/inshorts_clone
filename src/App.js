@@ -10,7 +10,14 @@ import MobileNav from './components/MobileNav/MobileNav';
 
 function App() {
   const myContext = useContext(MyContext);
-  const { isMobileDevice, sliderRef, windowHeight } = myContext;
+  const { isMobileDevice, sliderRef } = myContext;
+  const mobileRef = useRef();
+
+  const slideHandler = (slideNum) => {
+    if (slideNum == 1) {
+      mobileRef.current.scrollTo(0, 0);
+    }
+  }
 
   const sliderSettings = {
     infinite: false,
@@ -19,6 +26,7 @@ function App() {
     slidesToShow: 1,
     slidesToScroll: 1,
     initialSlide: 1,
+    afterChange: slideHandler
   }
 
   return (
@@ -26,7 +34,7 @@ function App() {
 
       {isMobileDevice ?
         <Slider {...sliderSettings} ref={sliderRef}>
-          <MobileNav />
+          <MobileNav mobileRef={mobileRef} />
 
           <Routes>
             <Route path={'/'} element={<News />} />

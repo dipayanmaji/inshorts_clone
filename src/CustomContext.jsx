@@ -12,7 +12,7 @@ const MyContextProvider = (props) => {
     const sliderRef = useRef();
 
     // Determind that site is open on a mobile device or a desktop.
-    const mobileDeviceHandler = ()=>{
+    const mobileDeviceHandler = () => {
         const details = navigator.userAgent;
         const regexp = /android|iphone|kindle|ipad/i;
         const mobileDevice = regexp.test(details);

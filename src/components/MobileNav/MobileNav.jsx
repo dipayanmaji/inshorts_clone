@@ -57,7 +57,7 @@ const categories = [
     }
 ];
 
-const MobileNav = () => {
+const MobileNav = ({ mobileRef }) => {
     const [displayLanguage, setDisplayLanguage] = useState(false);
 
     const myContext = useContext(MyContext);
@@ -69,12 +69,12 @@ const MobileNav = () => {
         localStorage.setItem("language", newsLanguage);
     }
 
-    const sliderHandler = ()=>{
+    const sliderHandler = () => {
         sliderRef.current.slickGoTo(1);
     }
 
     return (
-        <div className="mobile-nav" style={{ height: windowHeight }}>
+        <div className="mobile-nav" ref={mobileRef} style={{ height: windowHeight }}>
             <div className="top-header">
                 <span className="heading">{language == "hi" ? "श्रेणियां एवं विषय" : "Categories and Topics"}</span>
                 <div className="settings-back">
