@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import './Navbar.scss';
 import { NavLink } from "react-router-dom";
 import { MyContext } from "../../CustomContext";
+
 const categories = [
     {
         english: "National",
@@ -56,13 +57,13 @@ const Navbar = ({ displayNavbar, setDisplayNavbar }) => {
     return (
         <div className={`navbar ${!displayNavbar && "close-navbar"}`}>
             <div className="language">
-                <NavLink to={`/en/${currPath}`} id="en" onClick={(languageHandler)}>English</NavLink>
+                <NavLink to={`/en/${currPath}`} id="en" onClick={languageHandler}>English</NavLink>
                 <NavLink to={`/hi/${currPath}`} id="hi" onClick={languageHandler}>हिन्दी</NavLink>
             </div>
 
             <hr />
 
-            <span className="nav-heading">Categories</span>
+            <span className="nav-heading">{language == "hi" ? "श्रेणियां" : "Categories"}</span>
 
             <div className="categories">
                 {

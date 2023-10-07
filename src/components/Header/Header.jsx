@@ -5,14 +5,58 @@ import logo from '../../utilities/images/inshorts-logo-black.png'
 import Navbar from "../Navbar/Navbar";
 import { MyContext } from "../../CustomContext";
 
+const categories = [
+    {
+        english: "General",
+        hindi: "ख़ास ख़बरें"
+    },
+    {
+        english: "National",
+        hindi: "भारत"
+    },
+    {
+        english: "International",
+        hindi: "अंतरराष्ट्रीय"
+    },
+    {
+        english: "Business",
+        hindi: "बिज़नेस"
+    },
+    {
+        english: "Entertainment",
+        hindi: "मनोरंजन"
+    },
+    {
+        english: "Health",
+        hindi: "स्वास्थ्य"
+    },
+    {
+        english: "Science",
+        hindi: "विज्ञान"
+    },
+    {
+        english: "Sports",
+        hindi: "खेल"
+    },
+    {
+        english: "Technology",
+        hindi: "तकनीकी"
+    }
+];
+
 const Header = () => {
     const [displayNavbar, setDisplayNavbar] = useState(false);
 
     const myContext = useContext(MyContext);
-    const { currPath, language, isMobileDevice, hideHeader } = myContext;
+    const { currPath, language, isMobileDevice, hideHeader, sliderRef } = myContext;
 
     const menuHandler = () => {
-        setDisplayNavbar(!displayNavbar);
+        if (isMobileDevice) {
+            sliderRef.current.slickGoTo(0);
+        }
+        else {
+            setDisplayNavbar(!displayNavbar);
+        }
     }
 
     return (
@@ -32,7 +76,9 @@ const Header = () => {
                     </div>
                     {
                         isMobileDevice ?
-                            currPath.toLocaleUpperCase()
+                            language == "hi" ? categories.filter((category) => category.english.toLocaleLowerCase() == currPath)[0].hindi
+                                :
+                                currPath == "general" ? "TOP STORIES" : currPath.toLocaleUpperCase()
                             :
                             !displayNavbar ? "Menu" : "Close"
                     }

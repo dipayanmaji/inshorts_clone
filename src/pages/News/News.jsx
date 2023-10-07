@@ -142,7 +142,7 @@ const News = () => {
                         :
                         isMobileDevice ?
                             <>
-                                <Slider  {...sliderSettings} className="articles">
+                                <Slider {...sliderSettings} className="articles">
                                     {
                                         articles.map((article, index) => {
                                             return <NewsArticle key={index} article={article} />

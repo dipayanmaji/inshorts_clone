@@ -4,13 +4,13 @@ import News from './pages/News/News';
 import Header from './components/Header/Header';
 import Footer from './components/Footer/Footer';
 import Slider from 'react-slick';
-import { useContext } from 'react';
+import { useContext, useRef } from 'react';
 import { MyContext } from './CustomContext';
 import MobileNav from './components/MobileNav/MobileNav';
 
 function App() {
   const myContext = useContext(MyContext);
-  const { isMobileDevice } = myContext;
+  const { isMobileDevice, sliderRef } = myContext;
 
   const sliderSettings = {
     infinite: false,
@@ -25,7 +25,7 @@ function App() {
     <div className="App">
 
       {isMobileDevice ?
-        <Slider {...sliderSettings}>
+        <Slider {...sliderSettings} ref={sliderRef}>
           <MobileNav />
 
           <Routes>
