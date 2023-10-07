@@ -93,11 +93,11 @@ const MobileNav = ({ mobileRef }) => {
                 <span className="heading">{language == "hi" ? "श्रेणियां" : "CATEGORIES"}</span>
                 <span className="underline"></span>
                 <div className="items">
-                    <NavLink to={`/${language}/general`} className="item">
+                    <NavLink to={`/${language}/general`} className="item" onClick={sliderHandler}>
                         <div className="image" style={{ backgroundImage: `url(${topStories})` }}></div>
                         <span className="name">{language == "hi" ? "ख़ास ख़बरें" : "TOP STORIES"}</span>
                     </NavLink>
-                    <NavLink to={`/${language}/bookmarks`} className="item">
+                    <NavLink to={`/${language}/bookmarks`} className="item" onClick={sliderHandler}>
                         <div className="image" style={{ backgroundImage: `url(${bookmarks})` }}></div>
                         <span className="name">{language == "hi" ? "बुकमार्क" : "BOOKMARKS"}</span>
                     </NavLink>
