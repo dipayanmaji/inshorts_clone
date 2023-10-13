@@ -1,4 +1,5 @@
 .news-article {
+    touch-action: none; // for stop reloading browser while drag down
     width: 900px;
     height: 270px;
     background-color: #fff;
