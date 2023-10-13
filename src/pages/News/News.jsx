@@ -133,7 +133,7 @@ const News = () => {
     }
 
     return (
-        <div onTouchMove={(e) => e.stopPropagation()} className={`news ${isMobileDevice && "mobile-news"}`} style={{ height: isMobileDevice && windowHeight }}>
+        <div className={`news ${isMobileDevice && "mobile-news"}`} style={{ height: isMobileDevice && windowHeight }}>
             {isMobileDevice && <Header />}
             {
                 loader ? <img src={loading} alt="Loading" className="loader" />
