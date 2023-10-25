@@ -1,5 +1,4 @@
 .news-article {
-    touch-action: none; // for stop reloading browser while drag down
     width: 900px;
     height: 270px;
     background-color: #fff;
@@ -82,6 +81,7 @@
 
 // mobile version
 .mobile-news-article {
+    touch-action: none; // for stop reloading browser while drag down
     width: 100%;
     max-width: 100%;
     height: inherit;
@@ -118,7 +118,7 @@
         }
     }
 
-    .bottom-section{
+    .bottom-section {
         background-color: rgba(0, 0, 0, 0.9);
         color: white;
         font-size: 12px;
@@ -127,7 +127,7 @@
         box-sizing: border-box;
         line-height: 16px;
 
-        .image-link{
+        .image-link {
             font-size: 10px;
             text-decoration: none;
             color: white;
