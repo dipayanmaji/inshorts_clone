@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import './News.scss';
 import axios from "axios";
 import NewsArticle from "../../components/NewsArticle/NewsArticle";
-import loading from '../../utilities/images/loading.gif';
 import { useNavigate, useParams } from "react-router";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
