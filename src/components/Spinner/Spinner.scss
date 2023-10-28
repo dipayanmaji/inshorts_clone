@@ -1,0 +1,55 @@
+:root {
+    --radius: 50%;
+    --size: 2em;
+    --offset: 25px;
+}
+
+.rect-spinner {
+    display: grid;
+    place-items: center;
+    position: relative;
+    width: 4.25em;
+    height: 4.25em;
+    margin: auto;
+
+    .container {
+        position: relative;
+        background-color: blue;
+
+        .rect {
+            --size: 1em;
+            --degrees: 0deg;
+            position: absolute;
+            width: var(--size);
+            aspect-ratio: 4/1;
+            top: calc(var(--size) / 2);
+            left: calc(var(--size) / 2);
+            background-color: #1d1d1d;
+            border-radius: 20px;
+            opacity: 0;
+            animation: animate-in;
+            animation-duration: 800ms;
+            animation-timing-function: ease-in-out;
+            animation-fill-mode: alternate;
+            animation-iteration-count: infinite;
+        }
+
+        @for $j from 0 through 16 {
+            .rect:nth-of-type(#{$j}) {
+                --degrees: #{$j} * 360deg / 16;
+                transform: rotate(calc(var(--degrees))) translateX(var(--offset));
+                animation-delay: calc(#{$j} * 50ms);
+            }
+        }
+
+        @keyframes animate-in {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+    }
+}

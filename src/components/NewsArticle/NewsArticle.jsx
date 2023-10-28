@@ -2,6 +2,7 @@ import React, { useContext } from "react";
 import './NewsArticle.scss';
 import { getDate } from "../../utilities/convertToDate";
 import { MyContext } from "../../CustomContext";
+import { BackgroundImage } from "react-image-and-background-image-fade";
 
 const NewsArticle = ({ article }) => {
     const myContext = useContext(MyContext);
@@ -16,7 +17,12 @@ const NewsArticle = ({ article }) => {
 
     return (
         <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{ height: isMobileDevice && windowHeight }}>
-            <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div>
+            {/* <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div> */}
+            <BackgroundImage
+                className={"article-image"}
+                src={article.image}
+                lazyLoad
+            />
 
             <div className="content">
                 <span className="title">{article.title}</span>

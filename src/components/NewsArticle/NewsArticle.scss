@@ -19,6 +19,11 @@
         background-position: center;
         background-size: cover;
         background-repeat: no-repeat;
+
+        &+div {
+            z-index: unset;
+            border-radius: 4px;
+        }
     }
 
     .content {
@@ -95,6 +100,10 @@
 
     .article-image {
         border-radius: 0;
+
+        &+div {
+            border-radius: 0;
+        }
     }
 
     .content {

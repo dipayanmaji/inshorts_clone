@@ -10,6 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 import { MyContext } from "../../CustomContext";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
+import Spinner from "../../components/Spinner/Spinner";
 
 const validQuaries = ["general", "national", "international", "business", "entertainment", "health", "science", "sports", "technology"];
 let totalArticles;
@@ -136,7 +137,7 @@ const News = () => {
         <div className={`news ${isMobileDevice && "mobile-news"}`} style={{ height: isMobileDevice && windowHeight }}>
             {isMobileDevice && <Header />}
             {
-                loader ? <img src={loading} alt="Loading" className="loader" />
+                loader ? <Spinner />
                     :
                     networkErr ? <span className="network-err">Check your internet connection and try again.</span>
                         :
@@ -161,7 +162,7 @@ const News = () => {
                                 </div>
 
                                 {
-                                    lodingBtn ? <img src={loading} alt="Loading" className="btn-loader" />
+                                    lodingBtn ? <Spinner />
                                         :
                                         displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
                                 }
