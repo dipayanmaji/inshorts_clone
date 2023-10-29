@@ -22,42 +22,40 @@ const NewsArticle = ({ article }) => {
         e.stopPropagation();
         let classLists = Array.from(e.target.classList);
 
-        if (isMobileDevice) {
-            if (classLists.includes('bookmark-article')) { //bookmark removed
-                setIsBookmark(false);
-                let updatedBookmarksArticles;
+        if (classLists.includes('bookmark-article')) { //bookmark removed
+            setIsBookmark(false);
+            let updatedBookmarksArticles;
 
-                if (language == 'hi') {
-                    updatedBookmarksArticles = hindiBookmarkArticles.filter((eachArticle) => {
-                        return eachArticle.title != article.title;
-                    });
+            if (language == 'hi') {
+                updatedBookmarksArticles = hindiBookmarkArticles.filter((eachArticle) => {
+                    return eachArticle.title != article.title;
+                });
 
-                    setHindiBookmarkArticles(updatedBookmarksArticles);
-                }
-                else {
-                    updatedBookmarksArticles = englishBookmarkArticles.filter((eachArticle) => {
-                        return eachArticle.title != article.title;
-                    });
-
-                    setEnglishBookmarkArticles(updatedBookmarksArticles);
-                }
-
+                setHindiBookmarkArticles(updatedBookmarksArticles);
             }
-            else { // bookmark added
-                setIsBookmark(true);
-                if (language == 'hi') {
-                    setHindiBookmarkArticles([...hindiBookmarkArticles, article]);
-                }
-                else {
-                    setEnglishBookmarkArticles([...englishBookmarkArticles, article]);
-                }
+            else {
+                updatedBookmarksArticles = englishBookmarkArticles.filter((eachArticle) => {
+                    return eachArticle.title != article.title;
+                });
+
+                setEnglishBookmarkArticles(updatedBookmarksArticles);
             }
 
-            setdisplayMsg(true);
-            setTimeout(() => {
-                setdisplayMsg(false);
-            }, 3000);
         }
+        else { // bookmark added
+            setIsBookmark(true);
+            if (language == 'hi') {
+                setHindiBookmarkArticles([...hindiBookmarkArticles, article]);
+            }
+            else {
+                setEnglishBookmarkArticles([...englishBookmarkArticles, article]);
+            }
+        }
+
+        setdisplayMsg(true);
+        setTimeout(() => {
+            setdisplayMsg(false);
+        }, 3000);
     }
 
     useEffect(() => {
@@ -86,7 +84,12 @@ const NewsArticle = ({ article }) => {
             />
 
             <div className="content">
-                <span className={`title ${isMobileDevice && isBookmark && 'bookmark-article'}`} onClick={bookmarksHandler}>{article.title}</span>
+                {
+                    isMobileDevice ?
+                        <span className={`title ${isBookmark && 'bookmark-article'}`} onClick={bookmarksHandler}>{article.title}</span>
+                        :
+                        <a className={`title`} href={article.url} target="_blank">{article.title}</a>
+                }
                 <span className="author-time"><b>short</b> by {article.source.name} / {`${hours}:${minutes} ${meridiem} on ${day}, ${date} ${month}, ${year}`}</span>
                 <p className="description">{article.description}</p>
                 <span className="source">read more at <a href={article.url} target="_blank" className="name">{article.source.name}</a></span>

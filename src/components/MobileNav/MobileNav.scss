@@ -31,7 +31,6 @@
         .settings-back {
             display: flex;
             gap: 16px;
-            // align-items: center;
             color: #379af8;
             font-size: 18px;
 
@@ -174,7 +173,6 @@
                 border: 0.5px solid #8dc8ff;
                 border-radius: 5px;
                 box-shadow: 0 4px 4px -3px #369af8;
-
                 display: flex;
                 justify-content: center;
                 align-items: flex-end;
@@ -185,6 +183,11 @@
                 color: #000000;
                 padding-bottom: 1.8vw;
                 box-sizing: border-box;
+                filter: grayscale(0.7);
+
+                &.active {
+                    filter: grayscale(0);
+                }
             }
         }
     }

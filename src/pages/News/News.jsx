@@ -22,7 +22,7 @@ let apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
 
 const News = () => {
     const [displayLoadMore, setDisplayLoadMore] = useState(true);
-    const [loader, setLoader] = useState(false);
+    const [loader, setLoader] = useState(true);
     const [lodingBtn, setLodingBtn] = useState(false);
     const [networkErr, setNetworkErr] = useState(false);
 
