@@ -17,7 +17,6 @@ const NewsArticle = ({ article }) => {
 
     return (
         <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{ height: isMobileDevice && windowHeight }}>
-            {/* <div style={{ backgroundImage: `url(${article.image})` }} className="article-image"></div> */}
             <BackgroundImage
                 className={"article-image"}
                 src={article.image}

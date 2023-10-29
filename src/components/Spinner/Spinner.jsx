@@ -3,24 +3,24 @@ import './Spinner.scss';
 
 const Spinner = () => {
     return (
-        <section class="rect-spinner" tabindex="1" aria-label="rect spinner">
-            <div class="container">
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
-                <div class="rect"></div>
+        <section className="rect-spinner" tabIndex="1" aria-label="rect spinner">
+            <div className="container">
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
+                <div className="rect"></div>
             </div>
         </section>
     )
