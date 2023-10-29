@@ -10,12 +10,19 @@ import MobileNav from './components/MobileNav/MobileNav';
 
 function App() {
   const myContext = useContext(MyContext);
-  const { isMobileDevice, sliderRef } = myContext;
+  const { language, currPath, isMobileDevice, setHideHeader, setArticles, sliderRef, hindiBookmarkArticles, englishBookmarkArticles } = myContext;
   const mobileRef = useRef();
 
   const slideHandler = (slideNum) => {
     if (slideNum == 1) {
       mobileRef.current.scrollTo(0, 0);
+      setHideHeader(false);
+    }
+    else {
+      if (currPath == 'bookmarks') {
+        if (language === 'hi') setArticles(hindiBookmarkArticles);
+        else setArticles(englishBookmarkArticles);
+      }
     }
   }
 

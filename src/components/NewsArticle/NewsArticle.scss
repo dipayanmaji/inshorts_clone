@@ -41,6 +41,10 @@
             line-height: 27px;
         }
 
+        .bookmark-article {
+            color: #369af8;
+        }
+
         .author-time {
             font-size: 12px;
             color: #808290;
@@ -135,11 +139,30 @@
         padding: 8px;
         box-sizing: border-box;
         line-height: 16px;
+        position: relative;
 
         .image-link {
             font-size: 10px;
             text-decoration: none;
-            color: white;
+            color: #fff;
+        }
+
+        .bookmark-message {
+            position: absolute;
+            top: -50%;
+            left: 50%;
+            transform: translate(-50%, 0);
+            background-color: #5e5e5e;
+            border-radius: 16px;
+            padding: 4px 16px;
+            transition: 0.5s;
+            opacity: 0;
+            visibility: hidden;
+
+            &.d-item {
+                opacity: 1;
+                visibility: visible;
+            }
         }
     }
 }

@@ -41,6 +41,10 @@ const categories = [
     {
         english: "Technology",
         hindi: "तकनीकी"
+    },
+    {
+        english: "Bookmarks",
+        hindi: "बुकमार्क"
     }
 ];
 

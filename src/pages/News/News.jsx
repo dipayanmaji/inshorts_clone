@@ -3,6 +3,7 @@ import './News.scss';
 import axios from "axios";
 import NewsArticle from "../../components/NewsArticle/NewsArticle";
 import { useNavigate, useParams } from "react-router";
+import { Link } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
@@ -11,7 +12,7 @@ import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import Spinner from "../../components/Spinner/Spinner";
 
-const validQuaries = ["general", "national", "international", "business", "entertainment", "health", "science", "sports", "technology"];
+const validQuaries = ["general", "national", "international", "business", "entertainment", "health", "science", "sports", "technology", "bookmarks"];
 let totalArticles;
 let pageNum;
 
@@ -21,12 +22,12 @@ let apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
 
 const News = () => {
     const [displayLoadMore, setDisplayLoadMore] = useState(true);
-    const [loader, setLoader] = useState(true);
+    const [loader, setLoader] = useState(false);
     const [lodingBtn, setLodingBtn] = useState(false);
     const [networkErr, setNetworkErr] = useState(false);
 
     const myContext = useContext(MyContext);
-    const { language, setCurrPath, isMobileDevice, setHideHeader, articles, setArticles, windowHeight } = myContext;
+    const { language, setCurrPath, isMobileDevice, setHideHeader, articles, setArticles, windowHeight, hindiBookmarkArticles, englishBookmarkArticles } = myContext;
 
     const navigate = useNavigate();
     const params = useParams();
@@ -83,19 +84,36 @@ const News = () => {
         totalArticles = result?.data.totalArticles;
         setArticles(result?.data.articles);
         setLoader(false);
+        if (pageNum * 10 >= totalArticles) setDisplayLoadMore(false); // we get 10 articles in each api call
     }
 
     useEffect(() => {
         if (params.category == undefined || !validQuaries.includes(params.category)) {
             navigate(`/${language}/general`);
         }
-        else {
+        else if (params.category == 'bookmarks') {
+            const bookmarksArticle = language == 'hi' ? hindiBookmarkArticles : englishBookmarkArticles;
+            setLoader(true);
+            setNetworkErr(false);
+            setDisplayLoadMore(false);
+
+            setTimeout(() => {
+                setArticles(bookmarksArticle);
+                setLoader(false);
+            }, 1000);
+
+            document.title = "BOOKMARKS NEWS || INSHORTS CLONE";
             setCurrPath(params.category);
+        }
+        else {
             pageNum = 1;
             apiCall();
             document.title = (params.category == "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase()) + " NEWS || INSHORTS CLONE";
-            window.scrollTo(0, 0);
+            setCurrPath(params.category);
         }
+        window.scrollTo(0, 0);
+        setHideHeader(false);
+
     }, [params.category, language])
 
     const loadMoreArticles = async () => {
@@ -138,34 +156,40 @@ const News = () => {
             {
                 loader ? <Spinner />
                     :
-                    networkErr ? <span className="network-err">Check your internet connection and try again.</span>
+                    networkErr ? <span className="network-err">{language == 'hi' ? 'अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।' : 'Check your internet connection and try again.'}</span>
                         :
-                        isMobileDevice ?
-                            <>
-                                <Slider {...sliderSettings} className="articles">
-                                    {
-                                        articles.map((article, index) => {
-                                            return <NewsArticle key={index} article={article} />
-                                        })
-                                    }
-                                </Slider>
-                            </>
+                        articles.length == 0 ?
+                            <div className="bookmarks-err">
+                                <p>{language == 'hi' ? 'कोई बुकमार्क समाचार उपलब्ध नहीं हैं' : 'No bookmark news are available'}</p>
+                                <Link to={`${language}/general`}>Load News</Link>
+                            </div>
                             :
-                            <>
-                                <div className="articles">
-                                    {
-                                        articles.map((article, index) => {
-                                            return <NewsArticle key={index} article={article} />
-                                        })
-                                    }
-                                </div>
+                            isMobileDevice ?
+                                <>
+                                    <Slider {...sliderSettings} className="articles">
+                                        {
+                                            articles.map((article, index) => {
+                                                return <NewsArticle key={article.title} article={article} />
+                                            })
+                                        }
+                                    </Slider>
+                                </>
+                                :
+                                <>
+                                    <div className="articles">
+                                        {
+                                            articles.map((article, index) => {
+                                                return <NewsArticle key={index} article={article} />
+                                            })
+                                        }
+                                    </div>
 
-                                {
-                                    lodingBtn ? <Spinner />
-                                        :
-                                        displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
-                                }
-                            </>
+                                    {
+                                        lodingBtn ? <Spinner />
+                                            :
+                                            displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
+                                    }
+                                </>
             }
             {isMobileDevice && <Footer />}
         </div>

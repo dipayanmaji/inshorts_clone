@@ -10,6 +10,9 @@ const MyContextProvider = (props) => {
     const [articles, setArticles] = useState([]);
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
     const sliderRef = useRef();
+    const [hindiBookmarkArticles, setHindiBookmarkArticlesHandler] = useState(localStorage.getItem('bookmarksHindi') ? JSON.parse(localStorage.getItem('bookmarksHindi')) : []);
+    const [englishBookmarkArticles, setEnglishBookmarkArticlesHandler] = useState(localStorage.getItem('bookmarksEnglish') ? JSON.parse(localStorage.getItem('bookmarksEnglish')) : []);
+
 
     // Determind that site is open on a mobile device or a desktop.
     const mobileDeviceHandler = () => {
@@ -29,6 +32,16 @@ const MyContextProvider = (props) => {
         mobileDeviceHandler();
     })
 
+    const setHindiBookmarkArticles = (articlesArr) => {
+        setHindiBookmarkArticlesHandler(articlesArr);
+        localStorage.setItem('bookmarksHindi', JSON.stringify(articlesArr))
+    }
+
+    const setEnglishBookmarkArticles = (articlesArr) => {
+        setEnglishBookmarkArticlesHandler(articlesArr);
+        localStorage.setItem('bookmarksEnglish', JSON.stringify(articlesArr))
+    }
+
     useEffect(() => {
         mobileDeviceHandler();
     }, [])
@@ -40,7 +53,9 @@ const MyContextProvider = (props) => {
         hideHeader, setHideHeader,
         articles, setArticles,
         windowHeight,
-        sliderRef
+        sliderRef,
+        hindiBookmarkArticles, setHindiBookmarkArticles,
+        englishBookmarkArticles, setEnglishBookmarkArticles
     }
 
     return (
