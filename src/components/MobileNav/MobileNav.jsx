@@ -77,7 +77,7 @@ const MobileNav = ({ mobileRef }) => {
         <div className="mobile-nav" ref={mobileRef} style={{ height: windowHeight }}>
             <div className="top-header">
                 <span className="heading">{language == "hi" ? "श्रेणियां एवं विषय" : "Categories and Topics"}</span>
-                
+
                 <div className="settings-back">
 
                     <div className="settings" onClick={() => setDisplayLanguage(!displayLanguage)}>

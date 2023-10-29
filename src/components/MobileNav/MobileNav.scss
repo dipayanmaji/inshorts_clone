@@ -42,11 +42,11 @@
             .settings {
                 position: relative;
 
-                i{
+                i {
                     transition: 0.3s;
                 }
 
-                .rotate-icon{
+                .rotate-icon {
                     rotate: 90deg;
                 }
 
@@ -117,6 +117,11 @@
                 gap: 16px;
                 text-decoration: none;
                 color: #000000;
+                opacity: 0.7;
+
+                &.active {
+                    opacity: 1;
+                }
 
                 .image {
                     width: 50px;
@@ -124,13 +129,11 @@
                     background-position: center;
                     background-size: contain;
                     background-repeat: no-repeat;
-                    opacity: 0.8;
                 }
 
                 .name {
                     font-size: 0.6rem;
                     font-weight: 600;
-                    opacity: 0.8;
                     text-transform: uppercase;
                 }
             }

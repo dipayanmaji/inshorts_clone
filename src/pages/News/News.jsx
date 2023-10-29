@@ -169,7 +169,7 @@ const News = () => {
                                     <Slider {...sliderSettings} className="articles">
                                         {
                                             articles.map((article, index) => {
-                                                return <NewsArticle key={article.title} article={article} />
+                                                return <NewsArticle key={index} article={article} />
                                             })
                                         }
                                     </Slider>
