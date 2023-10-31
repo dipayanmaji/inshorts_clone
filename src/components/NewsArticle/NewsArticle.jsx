@@ -20,9 +20,8 @@ const NewsArticle = ({ article }) => {
 
     const bookmarksHandler = (e) => {
         e.stopPropagation();
-        let classLists = Array.from(e.target.classList);
 
-        if (classLists.includes('bookmark-article')) { //bookmark removed
+        if (isBookmark) { //bookmark removed
             setIsBookmark(false);
             let updatedBookmarksArticles;
 
@@ -40,7 +39,6 @@ const NewsArticle = ({ article }) => {
 
                 setEnglishBookmarkArticles(updatedBookmarksArticles);
             }
-
         }
         else { // bookmark added
             setIsBookmark(true);
@@ -95,11 +93,19 @@ const NewsArticle = ({ article }) => {
                 <span className="source">read more at <a href={article.url} target="_blank" className="name">{article.source.name}</a></span>
             </div>
 
-            {isMobileDevice && <span className="bottom-section">To see the full image <br />
-                <a href={article.image} target="_blank" className="image-link">Tap here</a>
+            {isMobileDevice && <div className="bottom-section">
+                <section>
+                    <span>To see the full image</span><br />
+                    <a href={article.image} target="_blank" className="image-link">Tap here</a>
+                </section>
+
+                <section className={`bookmark ${isBookmark && 'bookmark-article'}`} onClick={bookmarksHandler}>
+                    {isBookmark ? <i class="fa-solid fa-bookmark"></i> : <i class="fa-regular fa-bookmark"></i>}
+                    <span>{language == 'hi' ? 'बुकमार्क' : 'Bookmark'}</span>
+                </section>
 
                 <span className={`bookmark-message ${displayMsg && 'd-item'}`}>{isBookmark ? 'News Bookmarked' : 'Bookmark Removed'}</span>
-            </span>}
+            </div>}
         </div>
     )
 }
