@@ -101,6 +101,8 @@ const News = () => {
     }
 
     useEffect(() => {
+        setDisplayLoadMore(true);
+        
         if (params.category == undefined || !validQuaries.includes(params.category)) {
             navigate(`/${language}/general`);
         }
