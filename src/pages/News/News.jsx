@@ -100,7 +100,7 @@ const News = () => {
             setTimeout(() => {
                 setArticles(bookmarksArticle);
                 setLoader(false);
-            }, 1000);
+            }, 500);
 
             document.title = "BOOKMARKS NEWS || INSHORTS CLONE";
             setCurrPath(params.category);

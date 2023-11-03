@@ -9,10 +9,6 @@ const mainCategories = [
         hindi: "भारत"
     },
     {
-        english: "International",
-        hindi: "अंतरराष्ट्रीय"
-    },
-    {
         english: "Business",
         hindi: "बिज़नेस"
     },
@@ -58,10 +54,10 @@ const Navbar = ({ displayNavbar, setDisplayNavbar }) => {
     useEffect(() => {
         let updateCategories = [];
         if (language === 'hi') {
-            updateCategories = mainCategories.filter((category) => category.english !== "International");
+            updateCategories = mainCategories.filter((category) => category.english !== "National");
         }
         else {
-            updateCategories = mainCategories.filter((category) => category.english !== "National");
+            updateCategories = mainCategories;
         }
         setCategories(updateCategories);
 

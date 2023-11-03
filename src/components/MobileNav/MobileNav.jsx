@@ -4,7 +4,6 @@ import { NavLink } from "react-router-dom";
 import { MyContext } from "../../CustomContext";
 import topStories from '../../utilities/images/categories/top-stories.png';
 import bookmarks from '../../utilities/images/categories/bookmarks.png';
-
 import india from '../../utilities/images/categories/india.webp';
 import business from '../../utilities/images/categories/business.webp';
 import entertainment from '../../utilities/images/categories/entertainment.webp';
@@ -69,14 +68,14 @@ const MobileNav = ({ mobileRef }) => {
     }
 
     useEffect(() => {
+        let updateCategories = [];
         if (language === 'hi') {
-            let updateCategories;
             updateCategories = mainCategories.filter((category) => category.english !== "National");
-            setCategories(updateCategories);
         }
         else {
-            setCategories(mainCategories);
+            updateCategories = mainCategories;
         }
+        setCategories(updateCategories);
 
     }, [language])
 

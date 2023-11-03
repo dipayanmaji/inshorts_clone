@@ -131,14 +131,13 @@
     margin: 0;
     position: absolute;
     bottom: 0;
-    left: 0;
     transition: 0.3s;
     max-width: 900px;
     left: 50%;
     transform: translate(-50%, 0);
 
     .footer {
-        padding: 16px 8px;
+        padding: 18px 8px;
         display: block;
         color: rgb(182, 182, 182);
         text-align: center;
