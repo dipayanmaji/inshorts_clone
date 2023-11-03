@@ -16,6 +16,7 @@ const validQuaries = ["general", "national", "international", "business", "enter
 let totalArticles;
 let pageNum;
 
+let timeOut;
 // get apikey from https://gnews.io/
 // for one apikey we can able to send 100 request per day
 let apiKey = "aa9c04bf0f87a6cb98e5baa034ac6998";
@@ -25,6 +26,18 @@ const News = () => {
     const [loader, setLoader] = useState(true);
     const [lodingBtn, setLodingBtn] = useState(false);
     const [networkErr, setNetworkErr] = useState(false);
+    const [bookmarkMsg, setBookmarkMsg] = useState("News Bookmarked");
+    const [displayBookmarkMsg, setDisplayBookmarkMsg] = useState(false);
+
+    const bookmarkMsgHandler = (message) => {
+        setBookmarkMsg(message);
+        setDisplayBookmarkMsg(true);
+
+        clearTimeout(timeOut);
+        timeOut = setTimeout(() => {
+            setDisplayBookmarkMsg(false);
+        }, 3000);
+    }
 
     const myContext = useContext(MyContext);
     const { language, setCurrPath, isMobileDevice, setHideHeader, articles, setArticles, windowHeight, hindiBookmarkArticles, englishBookmarkArticles } = myContext;
@@ -169,10 +182,12 @@ const News = () => {
                                     <Slider {...sliderSettings} className="articles">
                                         {
                                             articles.map((article, index) => {
-                                                return <NewsArticle key={index} article={article} />
+                                                return <NewsArticle key={index} article={article} bookmarkMsgHandler={bookmarkMsgHandler} />
                                             })
                                         }
                                     </Slider>
+
+                                    <span className={`bookmark-message ${displayBookmarkMsg && 'd-item'}`}>{bookmarkMsg}</span>
                                 </>
                                 :
                                 <>

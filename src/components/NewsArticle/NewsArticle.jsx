@@ -4,9 +4,8 @@ import { getDate } from "../../utilities/convertToDate";
 import { MyContext } from "../../CustomContext";
 import { BackgroundImage } from "react-image-and-background-image-fade";
 
-const NewsArticle = ({ article }) => {
+const NewsArticle = ({ article, bookmarkMsgHandler }) => {
     const [isBookmark, setIsBookmark] = useState(false);
-    const [displayMsg, setdisplayMsg] = useState(false);
 
     const myContext = useContext(MyContext);
     const { language, isMobileDevice, hideHeader, setHideHeader, windowHeight, articles, hindiBookmarkArticles, setHindiBookmarkArticles, englishBookmarkArticles, setEnglishBookmarkArticles } = myContext;
@@ -23,6 +22,8 @@ const NewsArticle = ({ article }) => {
 
         if (isBookmark) { //bookmark removed
             setIsBookmark(false);
+            bookmarkMsgHandler("Bookmark Removed");
+
             let updatedBookmarksArticles;
 
             if (language == 'hi') {
@@ -42,6 +43,8 @@ const NewsArticle = ({ article }) => {
         }
         else { // bookmark added
             setIsBookmark(true);
+            bookmarkMsgHandler("News Bookmarked");
+
             if (language == 'hi') {
                 setHindiBookmarkArticles([...hindiBookmarkArticles, article]);
             }
@@ -49,11 +52,6 @@ const NewsArticle = ({ article }) => {
                 setEnglishBookmarkArticles([...englishBookmarkArticles, article]);
             }
         }
-
-        setdisplayMsg(true);
-        setTimeout(() => {
-            setdisplayMsg(false);
-        }, 3000);
     }
 
     useEffect(() => {
@@ -94,6 +92,7 @@ const NewsArticle = ({ article }) => {
             </div>
 
             {isMobileDevice && <div className="bottom-section">
+
                 <section>
                     <span>To see the full image</span><br />
                     <a href={article.image} target="_blank" className="image-link">Tap here</a>
@@ -104,7 +103,6 @@ const NewsArticle = ({ article }) => {
                     <span>{language == 'hi' ? 'बुकमार्क' : 'Bookmark'}</span>
                 </section>
 
-                <span className={`bookmark-message ${displayMsg && 'd-item'}`}>{isBookmark ? 'News Bookmarked' : 'Bookmark Removed'}</span>
             </div>}
         </div>
     )

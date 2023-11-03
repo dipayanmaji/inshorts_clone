@@ -165,23 +165,5 @@
         .bookmark-article {
             color: #369af8;
         }
-
-        .bookmark-message {
-            position: absolute;
-            top: -50%;
-            left: 50%;
-            transform: translate(-50%, 0);
-            background-color: #5e5e5e;
-            border-radius: 16px;
-            padding: 4px 16px;
-            transition: 0.5s;
-            opacity: 0;
-            visibility: hidden;
-
-            &.d-item {
-                opacity: 1;
-                visibility: visible;
-            }
-        }
     }
 }

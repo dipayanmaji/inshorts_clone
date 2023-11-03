@@ -92,4 +92,25 @@
     .slick-vertical .slick-slide {
         border: none;
     }
+
+    .bookmark-message {
+        color: white;
+        font-size: 12px;
+        font-weight: 100;
+        position: absolute;
+        bottom: 9%;
+        left: 50%;
+        transform: translate(-50%, 0);
+        background-color: #5e5e5e;
+        border-radius: 16px;
+        padding: 4px 16px;
+        transition: 0.5s;
+        opacity: 0;
+        visibility: hidden;
+
+        &.d-item {
+            opacity: 1;
+            visibility: visible;
+        }
+    }
 }
