@@ -12,7 +12,7 @@ import science from '../../utilities/images/categories/science.webp';
 import sports from '../../utilities/images/categories/sports.webp';
 import technology from '../../utilities/images/categories/technology.webp';
 
-let mainCategories = [
+const mainCategories = [
     {
         english: "National",
         hindi: "भारत",
