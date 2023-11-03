@@ -1,9 +1,9 @@
-import React, { useContext } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './Navbar.scss';
 import { NavLink } from "react-router-dom";
 import { MyContext } from "../../CustomContext";
 
-const categories = [
+const mainCategories = [
     {
         english: "National",
         hindi: "भारत"
@@ -39,6 +39,7 @@ const categories = [
 ];
 
 const Navbar = ({ displayNavbar, setDisplayNavbar }) => {
+    const [categories, setCategories] = useState(mainCategories);
 
     const myContext = useContext(MyContext);
     const { language, setLanguage, currPath } = myContext;
@@ -53,6 +54,18 @@ const Navbar = ({ displayNavbar, setDisplayNavbar }) => {
         localStorage.setItem("language", newsLanguage);
         setDisplayNavbar(false);
     }
+
+    useEffect(() => {
+        let updateCategories = [];
+        if (language === 'hi') {
+            updateCategories = mainCategories.filter((category) => category.english !== "International");
+        }
+        else {
+            updateCategories = mainCategories.filter((category) => category.english !== "National");
+        }
+        setCategories(updateCategories);
+
+    }, [language])
 
     return (
         <div className={`navbar ${!displayNavbar && "close-navbar"}`}>

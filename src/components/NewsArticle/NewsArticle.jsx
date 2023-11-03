@@ -100,7 +100,7 @@ const NewsArticle = ({ article }) => {
                 </section>
 
                 <section className={`bookmark ${isBookmark && 'bookmark-article'}`} onClick={bookmarksHandler}>
-                    {isBookmark ? <i class="fa-solid fa-bookmark"></i> : <i class="fa-regular fa-bookmark"></i>}
+                    {isBookmark ? <i className="fa-solid fa-bookmark"></i> : <i className="fa-regular fa-bookmark"></i>}
                     <span>{language == 'hi' ? 'बुकमार्क' : 'Bookmark'}</span>
                 </section>
 

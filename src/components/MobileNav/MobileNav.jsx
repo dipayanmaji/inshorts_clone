@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import './MobileNav.scss';
 import { NavLink } from "react-router-dom";
 import { MyContext } from "../../CustomContext";
@@ -6,7 +6,6 @@ import topStories from '../../utilities/images/categories/top-stories.png';
 import bookmarks from '../../utilities/images/categories/bookmarks.png';
 
 import india from '../../utilities/images/categories/india.webp';
-import international from '../../utilities/images/categories/international.webp';
 import business from '../../utilities/images/categories/business.webp';
 import entertainment from '../../utilities/images/categories/entertainment.webp';
 import health from '../../utilities/images/categories/health.webp';
@@ -14,16 +13,11 @@ import science from '../../utilities/images/categories/science.webp';
 import sports from '../../utilities/images/categories/sports.webp';
 import technology from '../../utilities/images/categories/technology.webp';
 
-const categories = [
+let mainCategories = [
     {
         english: "National",
         hindi: "भारत",
         imageUrl: india
-    },
-    {
-        english: "International",
-        hindi: "अंतरराष्ट्रीय",
-        imageUrl: international
     },
     {
         english: "Business",
@@ -59,6 +53,7 @@ const categories = [
 
 const MobileNav = ({ mobileRef }) => {
     const [displayLanguage, setDisplayLanguage] = useState(false);
+    const [categories, setCategories] = useState(mainCategories)
 
     const myContext = useContext(MyContext);
     const { language, setLanguage, currPath, windowHeight, sliderRef } = myContext;
@@ -72,6 +67,18 @@ const MobileNav = ({ mobileRef }) => {
     const sliderHandler = () => {
         sliderRef.current.slickGoTo(1);
     }
+
+    useEffect(() => {
+        if (language === 'hi') {
+            let updateCategories;
+            updateCategories = mainCategories.filter((category) => category.english !== "National");
+            setCategories(updateCategories);
+        }
+        else {
+            setCategories(mainCategories);
+        }
+
+    }, [language])
 
     return (
         <div className="mobile-nav" ref={mobileRef} style={{ height: windowHeight }}>
