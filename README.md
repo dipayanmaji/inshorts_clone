@@ -8,7 +8,7 @@
 
 <h1></h1>
 
-<img width="947" alt="inshrots_clone_1" src="https://github.com/dipayanmaji/inshorts_clone/assets/121128467/297af33c-da17-4af4-a7e9-128b5dc5b84c">
+![inshorts-clone-2](https://github.com/dipayanmaji/inshorts_clone/assets/121128467/253d6bc8-5c94-40d7-a07d-f605294921fd)
 
 <h1></h1>
 <h1>Features</h1>
@@ -35,4 +35,4 @@
 </ul>
 <h1></h1>
 
-<img width="947" alt="inshrots_clone_2" src="https://github.com/dipayanmaji/inshorts_clone/assets/121128467/19cdaf38-3e6e-439e-b35b-1558d106a6c2">
+![inshorts-clone-1](https://github.com/dipayanmaji/inshorts_clone/assets/121128467/95453d6c-c455-4191-b596-2f08d632aa77)
