@@ -22,6 +22,7 @@
 <h1>Tech Stack</h1>
 <ul>
   <li>ReactJS</li>
+  <li>Context API</li>
   <li>JavaScript</li>
   <li>HTML/CSS</li>
   <li>SCSS</li>
