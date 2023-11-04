@@ -13,10 +13,10 @@
 <h1></h1>
 <h1>Features</h1>
 <ul>
-  <li>Provide brief news summaries for quick reading</li>
-  <li>Let users tailor their news preferences.</li>
-  <li>Keep users informed with live news coverage.</li>
-  <li>Include images for richer content.</li>
+  <li>Provide brief news summaries for quick reading.</li>
+  <li>Get news in both Hindi and English language.</li>
+  <li>Save favorite articles as bookmark.</li>
+  <li>Mobile optimized website design.</li>
 </ul>
 
 <h1>Tech Stack</h1>
@@ -29,9 +29,10 @@
 
 <h1>Description</h1>
 <ul>
-  <li>Providing news summaries for quick and easy understanding.</li>
-  <li>Customizable news feeds for personalized content.</li>
-  <li>Timely updates on breaking news and events.</li>
+  <li>Provide brief news summaries for quick information consumption.</li>
+  <li>Offering news updates in two major languages, Hindi and English.</li>
+  <li>Customize news preferences by selecting preferred categories.</li>
+  <li>Bookmark preferred articles on the mobile version.</li>
 </ul>
 <h1></h1>
 
