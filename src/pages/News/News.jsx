@@ -55,8 +55,17 @@ const News = () => {
         setNetworkErr(false);
         let result;
         try {
-            result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+            // result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
             // as I use a free api now, that's why the 'page' quary not valid here. Still I use it by thinking that I have a paid api.
+
+            result = await axios.get(`https://gnews-proxy.onrender.com/api/news`, {
+              params: {
+                category,
+                page: pageNum,
+                lang: language,
+                country: params.category === "national" ? "in" : "any",
+              },
+            });
         }
         catch (err) {
             // when the per apikey's validity is expired then use another apikey through try-catch method
