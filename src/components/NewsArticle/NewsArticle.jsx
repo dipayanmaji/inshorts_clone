@@ -2,7 +2,8 @@ import React, { useContext, useEffect, useState } from "react";
 import './NewsArticle.scss';
 import { getDate } from "../../utilities/convertToDate";
 import { MyContext } from "../../CustomContext";
-import { BackgroundImage } from "react-image-and-background-image-fade";
+// import { BackgroundImage } from "react-image-and-background-image-fade";
+import { motion } from "framer-motion";
 
 const NewsArticle = ({ article, bookmarkMsgHandler }) => {
     const [isBookmark, setIsBookmark] = useState(false);
@@ -73,10 +74,18 @@ const NewsArticle = ({ article, bookmarkMsgHandler }) => {
 
     return (
         <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{ height: isMobileDevice && windowHeight }}>
-            <BackgroundImage
+            {/* <BackgroundImage
                 className={"article-image"}
                 src={article.image}
                 lazyLoad
+            /> */}
+
+            <motion.img
+                className={"article-image"}
+                src={article.image}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.8 }}
             />
 
             <div className="content">

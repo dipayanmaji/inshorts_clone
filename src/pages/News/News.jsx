@@ -59,12 +59,13 @@ const News = () => {
             // as I use a free api now, that's why the 'page' quary not valid here. Still I use it by thinking that I have a paid api.
 
             result = await axios.get(`https://gnews-proxy.onrender.com/api/news`, {
-              params: {
-                category,
-                page: pageNum,
-                lang: language,
-                country: params.category === "national" ? "in" : "any",
-              },
+                params: {
+                    category,
+                    page: pageNum,
+                    lang: language,
+                    country: params.category === "national" ? "in" : "any",
+                    apiKey: apiKey
+                },
             });
         }
         catch (err) {
@@ -72,25 +73,61 @@ const News = () => {
             console.log("expired 1st apikey");
             try {
                 apiKey = "239eafb61b40e1419a2bcd08e20492f7";
-                result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                // result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                result = await axios.get(`https://gnews-proxy.onrender.com/api/news`, {
+                    params: {
+                        category,
+                        page: pageNum,
+                        lang: language,
+                        country: params.category === "national" ? "in" : "any",
+                        apiKey: apiKey
+                    },
+                });
             }
             catch (err2) {
                 console.log("expired 2nd apikey");
                 try {
                     apiKey = "743d722dd292a77769e54e8d6aeb5475";
-                    result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                    // result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                    result = await axios.get(`https://gnews-proxy.onrender.com/api/news`, {
+                        params: {
+                            category,
+                            page: pageNum,
+                            lang: language,
+                            country: params.category === "national" ? "in" : "any",
+                            apiKey: apiKey
+                        },
+                    });
                 }
                 catch (err3) {
                     console.log("expired 3rd apikey");
                     try {
                         apiKey = "606ac7501ef2bd39836d80bceb5f32ec";
-                        result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                        // result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                        result = await axios.get(`https://gnews-proxy.onrender.com/api/news`, {
+                            params: {
+                                category,
+                                page: pageNum,
+                                lang: language,
+                                country: params.category === "national" ? "in" : "any",
+                                apiKey: apiKey
+                            },
+                        });
                     }
                     catch (err4) {
                         console.log("expired 4th apikey");
                         try {
                             apiKey = "611a1fcfe8a977c10b329207423901ff";
-                            result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                            // result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${params.category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+                            result = await axios.get(`https://gnews-proxy.onrender.com/api/news`, {
+                                params: {
+                                    category,
+                                    page: pageNum,
+                                    lang: language,
+                                    country: params.category === "national" ? "in" : "any",
+                                    apiKey: apiKey
+                                },
+                            });
                         }
                         catch (err4) {
                             console.log("expired 5th apikey");
@@ -111,7 +148,7 @@ const News = () => {
 
     useEffect(() => {
         setDisplayLoadMore(true);
-        
+
         if (params.category == undefined || !validQuaries.includes(params.category)) {
             navigate(`/${language}/general`);
         }
@@ -144,7 +181,16 @@ const News = () => {
         setLodingBtn(true);
         pageNum += 1;
         try {
-            const result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+            // const result = await axios.get(`https://gnews.io/api/v4/top-headlines?category=${category}&page=${pageNum}&lang=${language}&country=${category == "national" ? 'in' : 'any'}&max=10&apikey=${apiKey}`);
+            const result = await axios.get(`https://gnews-proxy.onrender.com/api/news`, {
+              params: {
+                category,
+                page: pageNum,
+                lang: language,
+                country: category == "national" ? 'in' : 'any',
+                apiKey: apiKey
+              },
+            });
             setArticles([...articles, ...result.data.articles]);
         } catch (err) {
             console.log("apikey validity expired");
