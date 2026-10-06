@@ -1,0 +1,69 @@
+// reuses the .news-article layout from NewsArticle.scss so the skeleton has the same size as a real article
+.articles-skeleton {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+
+    .skeleton {
+        background: linear-gradient(90deg, #ececec 25%, #f7f7f7 37%, #ececec 63%);
+        background-size: 400% 100%;
+        animation: skeleton-shimmer 1.4s ease infinite;
+        border-radius: 4px;
+    }
+
+    .skeleton-image {
+        width: 100%;
+        height: 100%;
+    }
+
+    .skeleton-line {
+        width: 100%;
+        height: 14px;
+
+        &.short {
+            width: 60%;
+        }
+    }
+
+    .skeleton-title {
+        height: 22px;
+    }
+
+    .skeleton-meta {
+        width: 45%;
+        height: 10px;
+        margin-bottom: 8px;
+    }
+}
+
+// mobile version
+.mobile-articles-skeleton {
+    margin-bottom: 0;
+
+    .skeleton-image {
+        border-radius: 0;
+    }
+
+    .content {
+        gap: 0.75rem;
+    }
+
+    .skeleton-title {
+        height: 18px;
+    }
+
+    .skeleton-bottom {
+        border-radius: 0;
+    }
+}
+
+@keyframes skeleton-shimmer {
+    0% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0 50%;
+    }
+}
