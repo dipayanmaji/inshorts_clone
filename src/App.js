@@ -14,12 +14,12 @@ function App() {
   const mobileRef = useRef();
 
   const slideHandler = (slideNum) => {
-    if (slideNum == 1) {
+    if (slideNum === 1) {
       mobileRef.current.scrollTo(0, 0);
       setHideHeader(false);
     }
     else {
-      if (currPath == 'bookmarks') {
+      if (currPath === 'bookmarks') {
         if (language === 'hi') setArticles(hindiBookmarkArticles);
         else setArticles(englishBookmarkArticles);
       }

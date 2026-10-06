@@ -72,7 +72,7 @@ const Navbar = ({ displayNavbar, setDisplayNavbar }) => {
 
             <hr />
 
-            <span className="nav-heading">{language == "hi" ? "श्रेणियां" : "Categories"}</span>
+            <span className="nav-heading">{language === "hi" ? "श्रेणियां" : "Categories"}</span>
 
             <div className="categories">
                 {
@@ -82,7 +82,7 @@ const Navbar = ({ displayNavbar, setDisplayNavbar }) => {
                             to={`/${language}/${category.english.toLocaleLowerCase()}`}
                             onClick={categoryClicked}
                         >
-                            {language == "hi" ? category.hindi : category.english == "National" ? "India" : category.english}
+                            {language === "hi" ? category.hindi : category.english === "National" ? "India" : category.english}
                         </NavLink>
                     })
                 }

@@ -94,7 +94,7 @@ const News = () => {
     const params = useParams();
     let category = params.category;
 
-    if (category == "national" || category == "international") {
+    if (category === "national" || category === "international") {
         category = "general";
     }
 
@@ -157,11 +157,11 @@ const News = () => {
     useEffect(() => {
         setDisplayLoadMore(true);
 
-        if (params.category == undefined || !validQuaries.includes(params.category)) {
+        if (params.category === undefined || !validQuaries.includes(params.category)) {
             navigate(`/${language}/general`);
         }
-        else if (params.category == 'bookmarks') {
-            const bookmarksArticle = language == 'hi' ? hindiBookmarkArticles : englishBookmarkArticles;
+        else if (params.category === 'bookmarks') {
+            const bookmarksArticle = language === 'hi' ? hindiBookmarkArticles : englishBookmarkArticles;
             setLoader(true);
             setNetworkErr(false);
             setSlowServer(false);
@@ -180,12 +180,14 @@ const News = () => {
         else {
             pageNum = 1;
             apiCall();
-            document.title = (params.category == "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase()) + " NEWS || INSHORTS CLONE";
+            document.title = (params.category === "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase()) + " NEWS || INSHORTS CLONE";
             setCurrPath(params.category);
         }
         window.scrollTo(0, 0);
         setHideHeader(false);
 
+        // only re-run when the category or language changes
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params.category, language])
 
     const loadMoreArticles = async () => {
@@ -230,15 +232,15 @@ const News = () => {
             {
                 loader ?
                     <>
-                        {slowServer && <span className="slow-server-msg">{language == 'hi' ? 'समाचार सर्वर शुरू हो रहा है, इसमें एक मिनट तक लग सकता है...' : 'Waking up the news server, this can take up to a minute...'}</span>}
+                        {slowServer && <span className="slow-server-msg">{language === 'hi' ? 'समाचार सर्वर शुरू हो रहा है, इसमें एक मिनट तक लग सकता है...' : 'Waking up the news server, this can take up to a minute...'}</span>}
                         <ArticleSkeleton />
                     </>
                     :
-                    networkErr ? <span className="network-err">{language == 'hi' ? 'अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।' : 'Check your internet connection and try again.'}</span>
+                    networkErr ? <span className="network-err">{language === 'hi' ? 'अपना इंटरनेट कनेक्शन जांचें और पुनः प्रयास करें।' : 'Check your internet connection and try again.'}</span>
                         :
-                        articles.length == 0 ?
+                        articles.length === 0 ?
                             <div className="bookmarks-err">
-                                <p>{language == 'hi' ? 'कोई बुकमार्क समाचार उपलब्ध नहीं हैं' : 'No bookmark news are available'}</p>
+                                <p>{language === 'hi' ? 'कोई बुकमार्क समाचार उपलब्ध नहीं हैं' : 'No bookmark news are available'}</p>
                                 <Link to={`${language}/general`}>Load News</Link>
                             </div>
                             :

@@ -27,16 +27,16 @@ const NewsArticle = ({ article, bookmarkMsgHandler }) => {
 
             let updatedBookmarksArticles;
 
-            if (language == 'hi') {
+            if (language === 'hi') {
                 updatedBookmarksArticles = hindiBookmarkArticles.filter((eachArticle) => {
-                    return eachArticle.title != article.title;
+                    return eachArticle.title !== article.title;
                 });
 
                 setHindiBookmarkArticles(updatedBookmarksArticles);
             }
             else {
                 updatedBookmarksArticles = englishBookmarkArticles.filter((eachArticle) => {
-                    return eachArticle.title != article.title;
+                    return eachArticle.title !== article.title;
                 });
 
                 setEnglishBookmarkArticles(updatedBookmarksArticles);
@@ -46,7 +46,7 @@ const NewsArticle = ({ article, bookmarkMsgHandler }) => {
             setIsBookmark(true);
             bookmarkMsgHandler("News Bookmarked");
 
-            if (language == 'hi') {
+            if (language === 'hi') {
                 setHindiBookmarkArticles([...hindiBookmarkArticles, article]);
             }
             else {
@@ -56,21 +56,21 @@ const NewsArticle = ({ article, bookmarkMsgHandler }) => {
     }
 
     useEffect(() => {
-        if (language == 'hi') {
+        if (language === 'hi') {
             const isArticleBookmarked = hindiBookmarkArticles.filter((eachArticle) => {
-                return eachArticle.title == article.title;
+                return eachArticle.title === article.title;
             }).length;
 
-            if (isArticleBookmarked) setIsBookmark(true);
+            setIsBookmark(isArticleBookmarked > 0);
         }
         else {
             const isArticleBookmarked = englishBookmarkArticles.filter((eachArticle) => {
-                return eachArticle.title == article.title;
+                return eachArticle.title === article.title;
             }).length;
 
-            if (isArticleBookmarked) setIsBookmark(true);
+            setIsBookmark(isArticleBookmarked > 0);
         }
-    }, [articles, language, hindiBookmarkArticles, englishBookmarkArticles])
+    }, [articles, language, hindiBookmarkArticles, englishBookmarkArticles, article.title])
 
     return (
         <div className={`news-article ${isMobileDevice && "mobile-news-article"}`} onClick={articleHandler} style={{ height: isMobileDevice && windowHeight }}>
@@ -93,23 +93,23 @@ const NewsArticle = ({ article, bookmarkMsgHandler }) => {
                     isMobileDevice ?
                         <span className={`title ${isBookmark && 'bookmark-article'}`} onClick={bookmarksHandler}>{article.title}</span>
                         :
-                        <a className={`title`} href={article.url} target="_blank">{article.title}</a>
+                        <a className={`title`} href={article.url} target="_blank" rel="noreferrer">{article.title}</a>
                 }
                 <span className="author-time"><b>short</b> by {article.source.name} / {`${hours}:${minutes} ${meridiem} on ${day}, ${date} ${month}, ${year}`}</span>
                 <p className="description">{article.description}</p>
-                <span className="source">read more at <a href={article.url} target="_blank" className="name">{article.source.name}</a></span>
+                <span className="source">read more at <a href={article.url} target="_blank" rel="noreferrer" className="name">{article.source.name}</a></span>
             </div>
 
             {isMobileDevice && <div className="bottom-section">
 
                 <section>
                     <span>To see the full image</span><br />
-                    <a href={article.image} target="_blank" className="image-link">Tap here</a>
+                    <a href={article.image} target="_blank" rel="noreferrer" className="image-link">Tap here</a>
                 </section>
 
                 <section className={`bookmark ${isBookmark && 'bookmark-article'}`} onClick={bookmarksHandler}>
                     {isBookmark ? <i className="fa-solid fa-bookmark"></i> : <i className="fa-regular fa-bookmark"></i>}
-                    <span>{language == 'hi' ? 'बुकमार्क' : 'Bookmark'}</span>
+                    <span>{language === 'hi' ? 'बुकमार्क' : 'Bookmark'}</span>
                 </section>
 
             </div>}

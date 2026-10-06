@@ -82,7 +82,7 @@ const MobileNav = ({ mobileRef }) => {
     return (
         <div className="mobile-nav" ref={mobileRef} style={{ height: windowHeight }}>
             <div className="top-header">
-                <span className="heading">{language == "hi" ? "श्रेणियां एवं विषय" : "Categories and Topics"}</span>
+                <span className="heading">{language === "hi" ? "श्रेणियां एवं विषय" : "Categories and Topics"}</span>
 
                 <div className="settings-back">
 
@@ -100,22 +100,22 @@ const MobileNav = ({ mobileRef }) => {
             </div>
 
             <div className="categories">
-                <span className="heading">{language == "hi" ? "श्रेणियां" : "CATEGORIES"}</span>
+                <span className="heading">{language === "hi" ? "श्रेणियां" : "CATEGORIES"}</span>
                 <span className="underline"></span>
                 <div className="items">
                     <NavLink to={`/${language}/general`} className="item" onClick={sliderHandler}>
                         <div className="image" style={{ backgroundImage: `url(${topStories})` }}></div>
-                        <span className="name">{language == "hi" ? "ख़ास ख़बरें" : "TOP STORIES"}</span>
+                        <span className="name">{language === "hi" ? "ख़ास ख़बरें" : "TOP STORIES"}</span>
                     </NavLink>
                     <NavLink to={`/${language}/bookmarks`} className="item" onClick={sliderHandler}>
                         <div className="image" style={{ backgroundImage: `url(${bookmarks})` }}></div>
-                        <span className="name">{language == "hi" ? "बुकमार्क" : "BOOKMARKS"}</span>
+                        <span className="name">{language === "hi" ? "बुकमार्क" : "BOOKMARKS"}</span>
                     </NavLink>
                 </div>
             </div>
 
             <div className="suggested-topics">
-                <span className="heading">{language == "hi" ? "सुझाए गए विषय" : "SUGGESTED TOPICS"}</span>
+                <span className="heading">{language === "hi" ? "सुझाए गए विषय" : "SUGGESTED TOPICS"}</span>
                 <span className="underline"></span>
 
                 <div className="topics">
@@ -128,7 +128,7 @@ const MobileNav = ({ mobileRef }) => {
                                 style={{ backgroundImage: `url(${category.imageUrl})` }}
                                 onClick={sliderHandler}
                             >
-                                {language == "hi" ? category.hindi : category.english == "National" ? "India" : category.english}
+                                {language === "hi" ? category.hindi : category.english === "National" ? "India" : category.english}
                             </NavLink>
                         })
                     }
