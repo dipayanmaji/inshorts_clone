@@ -17,38 +17,14 @@ let totalArticles;
 let pageNum;
 
 let timeOut;
+// the GNews apikeys are kept on the proxy server (Render environment variable GNEWS_API_KEYS),
+// it switches to the next key when one reaches its daily limit
 const API_URL = "https://gnews-proxy.onrender.com/api/news";
-// get apikey from https://gnews.io/
-// for one apikey we can able to send 100 request per day
-// when one apikey's validity is expired then the next one is used
-const apiKeys = [
-    "aa9c04bf0f87a6cb98e5baa034ac6998",
-    "239eafb61b40e1419a2bcd08e20492f7",
-    "743d722dd292a77769e54e8d6aeb5475",
-    "606ac7501ef2bd39836d80bceb5f32ec",
-    "611a1fcfe8a977c10b329207423901ff"
-];
-let apiKeyIndex = 0;
 // every new category/language load gets a new id, so a late response of an old request can be ignored
 let latestRequestId = 0;
 
 // as I use a free api now, that's why the 'page' quary not valid here. Still I use it by thinking that I have a paid api.
-const fetchNews = async (newsParams) => {
-    let lastErr;
-    for (let i = 0; i < apiKeys.length; i++) {
-        const keyIndex = (apiKeyIndex + i) % apiKeys.length;
-        try {
-            const result = await axios.get(API_URL, { params: { ...newsParams, apiKey: apiKeys[keyIndex] } });
-            apiKeyIndex = keyIndex;
-            return result;
-        }
-        catch (err) {
-            console.log(`expired apikey ${keyIndex + 1}`);
-            lastErr = err;
-        }
-    }
-    throw lastErr;
-}
+const fetchNews = (newsParams) => axios.get(API_URL, { params: newsParams });
 
 // last fetched news of every category are saved, so they can be shown instantly while the server wakes up
 const getCachedNews = (cacheKey) => {
@@ -93,7 +69,7 @@ const News = () => {
     const params = useParams();
     let category = params.category;
 
-    if (category === "national" | category === "international") {
+    if (category === "national" || category === "international") {
         category = "general";
     }
 
@@ -156,7 +132,7 @@ const News = () => {
     useEffect(() => {
         setDisplayLoadMore(true);
 
-        if (params.category === undefined | !validQuaries.includes(params.category)) {
+        if (params.category === undefined || !validQuaries.includes(params.category)) {
             navigate(`/${language}/general`);
         }
         else if (params.category === 'bookmarks') {
@@ -173,13 +149,13 @@ const News = () => {
                 setLoader(false);
             }, 500);
 
-            document.title = "BOOKMARKS NEWS | INSHORTS CLONE";
+            document.title = "BOOKMARKS NEWS || INSHORTS CLONE";
             setCurrPath(params.category);
         }
         else {
             pageNum = 1;
             apiCall();
-            document.title = (params.category === "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase()) + " NEWS | INSHORTS CLONE";
+            document.title = (params.category === "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase()) + " NEWS || INSHORTS CLONE";
             setCurrPath(params.category);
         }
         window.scrollTo(0, 0);
@@ -197,7 +173,8 @@ const News = () => {
             const result = await fetchNews(newsParams(pageNum));
             if (requestId === latestRequestId) setArticles((prevArticles) => [...prevArticles, ...result.data.articles]);
         } catch (err) {
-            console.log("apikey validity expired");
+            console.log("failed to load more news", err.response?.data?.error || err.message);
+            if (requestId === latestRequestId) pageNum -= 1; // so the same page is tried again next time
         }
 
         setLodingBtn(false);
@@ -214,6 +191,11 @@ const News = () => {
         }
     }
 
+    // mobile has no "Load More" button, the next articles are loaded when the user is close to the last one
+    const slideChangeHandler = (index) => {
+        if (displayLoadMore && !lodingBtn && index >= articles.length - 3) loadMoreArticles();
+    }
+
     const sliderSettings = {
         infinite: false,
         vertical: true,
@@ -223,6 +205,7 @@ const News = () => {
         slidesToShow: 1,
         slidesToScroll: 1,
         beforeChange: slideScrollHandler,
+        afterChange: slideChangeHandler,
     }
 
     return (
@@ -250,6 +233,8 @@ const News = () => {
                                             articles.map((article, index) => {
                                                 return <NewsArticle key={index} article={article} bookmarkMsgHandler={bookmarkMsgHandler} />
                                             })
+                                            // skeleton as the last slide while the next articles are loading (an array, as react-slick counts `false` as a slide)
+                                            .concat(lodingBtn ? [<ArticleSkeleton key="loading-more" />] : [])
                                         }
                                     </Slider>
 
