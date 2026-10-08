@@ -47,9 +47,9 @@
         gap: 1.5rem;
         margin-bottom: 2rem;
 
-        &+.rect-spinner .container .rect {
-            --size: 0.5em;
-            --offset: 12px;
+        // skeleton shown while "Load More" is fetching, the list already has the bottom margin
+        .articles-skeleton {
+            margin-bottom: 0;
         }
     }
 
@@ -82,13 +82,6 @@
     max-width: 900px;
     overflow: hidden;
     position: relative;
-
-    .loader {
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        transform: translate(-50%, -50%);
-    }
 
     .articles {
         display: block;

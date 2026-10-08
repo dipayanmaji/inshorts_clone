@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 
 const NewsArticle = ({ article, bookmarkMsgHandler }) => {
     const [isBookmark, setIsBookmark] = useState(false);
+    const [imageError, setImageError] = useState(false);
 
     const myContext = useContext(MyContext);
     const { language, isMobileDevice, hideHeader, setHideHeader, windowHeight, articles, hindiBookmarkArticles, setHindiBookmarkArticles, englishBookmarkArticles, setEnglishBookmarkArticles } = myContext;
@@ -55,6 +56,11 @@ const NewsArticle = ({ article, bookmarkMsgHandler }) => {
         }
     }
 
+    // the same component is reused for another article (key is index), so give the new image a fresh try
+    useEffect(() => {
+        setImageError(false);
+    }, [article.image])
+
     useEffect(() => {
         if (language === 'hi') {
             const isArticleBookmarked = hindiBookmarkArticles.filter((eachArticle) => {
@@ -80,13 +86,23 @@ const NewsArticle = ({ article, bookmarkMsgHandler }) => {
                 lazyLoad
             /> */}
 
-            <motion.img
-                className={"article-image"}
-                src={article.image}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ duration: 0.8 }}
-            />
+            {
+                article.image && !imageError ?
+                    <motion.img
+                        className={"article-image"}
+                        src={article.image}
+                        alt={article.title}
+                        onError={() => setImageError(true)}
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.8 }}
+                    />
+                    :
+                    // broken or missing image url
+                    <div className="article-image image-fallback">
+                        <img src={`${process.env.PUBLIC_URL}/icon192x192.png`} alt="inshorts" />
+                    </div>
+            }
 
             <div className="content">
                 {

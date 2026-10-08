@@ -1,10 +1,10 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Inshorts Clone",
+  "name": "Inshorts Clone - News in 60 words",
   "icons": [
     {
       "src": "icon64x64.png",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "64x64",
       "type": "image/png"
     },
     {

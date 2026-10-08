@@ -10,7 +10,6 @@ import "slick-carousel/slick/slick-theme.css";
 import { MyContext } from "../../CustomContext";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
-import Spinner from "../../components/Spinner/Spinner";
 import ArticleSkeleton from "../../components/ArticleSkeleton/ArticleSkeleton";
 
 const validQuaries = ["general", "national", "international", "business", "entertainment", "health", "science", "sports", "technology", "bookmarks"];
@@ -94,7 +93,7 @@ const News = () => {
     const params = useParams();
     let category = params.category;
 
-    if (category === "national" || category === "international") {
+    if (category === "national" | category === "international") {
         category = "general";
     }
 
@@ -157,7 +156,7 @@ const News = () => {
     useEffect(() => {
         setDisplayLoadMore(true);
 
-        if (params.category === undefined || !validQuaries.includes(params.category)) {
+        if (params.category === undefined | !validQuaries.includes(params.category)) {
             navigate(`/${language}/general`);
         }
         else if (params.category === 'bookmarks') {
@@ -174,13 +173,13 @@ const News = () => {
                 setLoader(false);
             }, 500);
 
-            document.title = "BOOKMARKS NEWS || INSHORTS CLONE";
+            document.title = "BOOKMARKS NEWS | INSHORTS CLONE";
             setCurrPath(params.category);
         }
         else {
             pageNum = 1;
             apiCall();
-            document.title = (params.category === "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase()) + " NEWS || INSHORTS CLONE";
+            document.title = (params.category === "general" ? "TOP HEADLINES" : params.category.toLocaleUpperCase()) + " NEWS | INSHORTS CLONE";
             setCurrPath(params.category);
         }
         window.scrollTo(0, 0);
@@ -264,13 +263,10 @@ const News = () => {
                                                 return <NewsArticle key={index} article={article} />
                                             })
                                         }
+                                        {lodingBtn && <ArticleSkeleton count={2} />}
                                     </div>
 
-                                    {
-                                        lodingBtn ? <Spinner />
-                                            :
-                                            displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>
-                                    }
+                                    {!lodingBtn && displayLoadMore && <button className="load-more" onClick={loadMoreArticles}>Load More</button>}
                                 </>
             }
             {isMobileDevice && <Footer />}
